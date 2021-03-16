@@ -35,7 +35,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password_CreateAccount);
         rePasswordEditText = findViewById(R.id.repassword_CreateAccount);
 
-        // Initialize Firebase Auth
+        // Inicializamos Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -62,7 +62,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     FirebaseUser user = mAuth.getCurrentUser();
                     updateUI(user);
 
-                    //Mandar a una nueva vista:
+                    // Mandar a una nueva vista:
                     //------------->>!!
                     startActivity(new Intent(CreateAccountActivity.this, MainMenu.class));
                     finish();

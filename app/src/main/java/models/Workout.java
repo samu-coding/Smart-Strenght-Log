@@ -1,12 +1,16 @@
 package models;
 
+import java.util.List;
+
 public class Workout {
 
-    private String id; //Primary Key
-    private String user; //Foreign key
-    private String tittle;
-    private String description;
-    private String ejercicios []; //id de los ejercicios
+    public String id; //Primary Key
+    public String user; //Foreign key
+    public String title;
+    public String description;
+    public List<String> exercises;
+
+
 
 
 }
