@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import models.Workout;
+import util.SmartStrengthLogAPI;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -44,27 +45,12 @@ public class MainMenu extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        writeDatabase();
+        //Gracias a la API podemos coger el usuario o el id cuando queramos
+        //SmartStrengthLogAPI.getInstance().getUserId();
+        //SmartStrengthLogAPI.getInstance().getUsername()
 
     }
 
-    private void writeDatabase() {
-
-        Workout workout = new Workout();
-
-        //Obtenemos el usuario
-        workout.title = "Torso 1";
-        workout.description ="Primer dia";
-        workout.user = myAuth.getUid().toString();
-        workout.id = "1234";
-
-        workout.exercises = Arrays.asList("1", "2");
-
-        //Path es la manera de identificar las características
-        databaseReference = database.getReference(workout.user);
-        databaseReference.setValue(workout);
-
-    }
 
     public void logOut (View view){
 

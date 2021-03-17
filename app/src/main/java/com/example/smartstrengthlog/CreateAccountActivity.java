@@ -12,18 +12,38 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import util.SmartStrengthLogAPI;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
+    //Firebase Auth
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+
+    //FireStore
+    private FirebaseFirestore  db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = db.collection("Users");
 
     private EditText emailEditText;
     private EditText passwordEditText;
     private EditText rePasswordEditText;
+
+
 
 
     @Override
@@ -38,13 +58,30 @@ public class CreateAccountActivity extends AppCompatActivity {
         // Inicializamos Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                currentUser = firebaseAuth.getCurrentUser();
+
+                if (currentUser!= null){
+                    //User already logged in
+                }else{
+                    //No user yet...
+                }
+
+            }
+        };
+
     }
 
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+        mAuth.addAuthStateListener(authStateListener);
     }
 
     private void updateUI(FirebaseUser currentUser) {
@@ -62,10 +99,65 @@ public class CreateAccountActivity extends AppCompatActivity {
                     FirebaseUser user = mAuth.getCurrentUser();
                     updateUI(user);
 
+                    //Firestore creation
+                    assert user != null;
+                    String userId = user.getUid(); //Obtenemos el Id del usuario
+
+                    Map <String, String> userObj = new HashMap<>();
+                    userObj.put("userId", userId);
+                    userObj.put("username", email );
+
+                    //save to FireStore db
+                    collectionReference.add(userObj)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    documentReference.get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if (task.getResult().exists()){
+                                                        String name = task.getResult()
+                                                                .getString("username");
+
+
+
+                                                        SmartStrengthLogAPI smartStrengthLogAPI = SmartStrengthLogAPI.getInstance(); //Global API
+                                                        smartStrengthLogAPI.setUserId(userId);
+                                                        smartStrengthLogAPI.setUsername(email);
+
+
+                                                        //Cambio de vista
+                                                        Intent intent = new Intent(CreateAccountActivity.this,
+                                                                MainMenu.class);
+                                                        intent.putExtra("username", email);
+                                                        intent.putExtra("userId", userId);
+                                                        startActivity(intent);
+
+
+                                                    }else {
+
+                                                    }
+                                                }
+                                            });
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
+
+
+
+
+
                     // Mandar a una nueva vista:
                     //------------->>!!
-                    startActivity(new Intent(CreateAccountActivity.this, MainMenu.class));
-                    finish();
+                    //startActivity(new Intent(CreateAccountActivity.this, MainMenu.class));
+                    //finish();
 
                 } else {
                     // If sign in fails, display a message to the user.
@@ -90,6 +182,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
         String rePassword = rePasswordEditText.getText().toString();
 
+        //currentUser = mAuth.getCurrentUser();
+        //assert currentUser != null;
+        //String currentUserId = currentUser.getUid();
+
+
 
         Log.i("User:",""+email);
         Log.i("User:",""+password);
@@ -102,6 +199,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                     //Creamos usuario
                     createUserWithEmailAndPassword(email, password);
+
 
                 }else {
                     Toast.makeText(this, "Password should be at least 6 characters long", Toast.LENGTH_SHORT).show();
