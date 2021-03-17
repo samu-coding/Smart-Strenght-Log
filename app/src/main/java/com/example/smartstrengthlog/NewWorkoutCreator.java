@@ -2,8 +2,11 @@ package com.example.smartstrengthlog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 public class NewWorkoutCreator extends AppCompatActivity {
 
@@ -14,11 +17,19 @@ public class NewWorkoutCreator extends AppCompatActivity {
     }
 
     //Boton para crear el workout
-    public void createWorkout(){
 
-        Log.i("Create", "Workout");
+
+
+
+
+    public void createWorkoutButton(View view){
+
+        startActivity(new Intent(this, MainMenu.class));
+        finish();
+        Toast.makeText(this, "Workout created!", Toast.LENGTH_LONG).show();
 
     }
+
 
 }
 
