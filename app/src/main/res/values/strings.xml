@@ -14,4 +14,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="newWorkoutButton">Boton para añadir un  nuevo workout</string>
+    <string name="titleWorkout_hint">Title of the workout</string>
+    <string name="Description_Workout_hint">Description</string>
+    <string name="button_create_workout_text">Create workout</string>
+    <string name="exercise_Workout_hint">Exercise</string>
+    <string name="sets_Workout_hint">Number of sets</string>
+    <string name="title_workout_creating_text">New Workout:</string>
 </resources>
