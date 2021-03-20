@@ -22,7 +22,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
+import java.util.List;
 
 import models.Workout;
 import util.SmartStrengthLogAPI;
@@ -31,8 +32,13 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
     private EditText titleEditText;
     private EditText descriptionEditText;
-    private EditText exerciseEditText;
-    private EditText numberOfSetsEditText;
+
+    private EditText exerciseEditText0;
+    private EditText numberOfSetsEditText0;
+    private EditText exerciseEditText1;
+    private EditText numberOfSetsEditText1;
+    private EditText exerciseEditText2;
+    private EditText numberOfSetsEditText2;
 
     private TextView currentUserTextView;
 
@@ -45,18 +51,6 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
     //Connection to Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    //Bundle extras = getIntent().getExtras();
-
-
-    //FirebaseUser user = firebaseAuth.getCurrentUser();
-    //String currentUserId = user.getUid();
-
-    //Obtenemos el Id del usuario
-    //updateUI(user);
-
-    //Firestore creation
-    //assert user != null;
 
     private CollectionReference collectionReference = db.collection("Workout");
     //private CollectionReference collectionReference = db.collection("Users").document(this.currentUsername).collection("Workout");
@@ -71,8 +65,14 @@ public class NewWorkoutCreator extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         titleEditText = findViewById(R.id.title_workout);
         descriptionEditText = findViewById(R.id.description_workout);
-        exerciseEditText = findViewById(R.id.exercise_workout);
-        numberOfSetsEditText = findViewById(R.id.number_sets_workout);
+
+        //Ejercicios
+        exerciseEditText0 = findViewById(R.id.exercise_workout0);
+        numberOfSetsEditText0 = findViewById(R.id.number_sets_workout0);
+        exerciseEditText1 = findViewById(R.id.exercise_workout1);
+        numberOfSetsEditText1 = findViewById(R.id.number_sets_workout1);
+        exerciseEditText2 = findViewById(R.id.exercise_workout2);
+        numberOfSetsEditText2 = findViewById(R.id.number_sets_workout2);
 
         Log.d("Usuario","TESTING LOG D");
 
@@ -134,8 +134,25 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
         String title = titleEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
-        String exercise = exerciseEditText.getText().toString().trim();
-        int numberOfSets = Integer.parseInt(numberOfSetsEditText.getText().toString().trim());
+        String exercise0 = exerciseEditText0.getText().toString().trim();
+        int numberOfSets0 = Integer.parseInt(numberOfSetsEditText0.getText().toString());
+        String exercise1 = exerciseEditText1.getText().toString().trim();
+        int numberOfSets1 = Integer.parseInt(numberOfSetsEditText1.getText().toString());
+        String exercise2 = exerciseEditText2.getText().toString().trim();
+        int numberOfSets2 = Integer.parseInt(numberOfSetsEditText2.getText().toString());
+
+        //Creamos las Listas de Ejercicios y sus sets
+        List<String> exercises = new ArrayList<String>();
+        List<Integer> sets = new ArrayList<Integer>();
+
+        //Añadimos ejercicios y sets
+        exercises.add(exercise0);
+        exercises.add(exercise1);
+        exercises.add(exercise2);
+        sets.add(numberOfSets0);
+        sets.add(numberOfSets1);
+        sets.add(numberOfSets2);
+
 
         if (!TextUtils.isEmpty(title)){
             //Guardamos la info del workout en FireStore
@@ -143,12 +160,13 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
             //Create a Workout Object
             Workout workout = new Workout();
-            workout.setTitle(title);
-            workout.setDescription(description);
-            workout.setExercises(exercise);
-            workout.setNumberOfSets(numberOfSets);
             workout.setId(String.valueOf(Timestamp.now().getSeconds()));
             workout.setUser(SmartStrengthLogAPI.getInstance().getUserId());
+            workout.setTitle(title);
+            workout.setDescription(description);
+            workout.setExercises(exercises);
+            workout.setSets(sets);
+
 
             //Invoke our CollectionReference
             collectionReference.add(workout)

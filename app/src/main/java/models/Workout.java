@@ -1,28 +1,26 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Workout {
 
     public String id; //Primary Key
     public String user; //Foreign key
     public String title;
     public String description;
-    public String exercises;
-    public int numberOfSets;
+    List<String> exercises = new ArrayList<String>();
+    List<Integer> sets = new ArrayList<Integer>();
+
+
 
     public Workout() { //Necesario la Firestore
-    }
-
-    public int getNumberOfSets() {
-        return numberOfSets;
-    }
-
-    public void setNumberOfSets(int numberOfSets) {
-        this.numberOfSets = numberOfSets;
     }
 
     public String getId() {
         return id;
     }
+
 
     public void setId(String id) {
         this.id = id;
@@ -52,20 +50,29 @@ public class Workout {
         this.description = description;
     }
 
-    public String getExercises() {
+    public List<String> getExercises() {
         return exercises;
     }
 
-    public void setExercises(String exercises) {
+    public void setExercises(List<String> exercises) {
         this.exercises = exercises;
     }
 
-    public Workout(String id, String user, String title, String description, String exercises, int numberOfSets) {
+    public List<Integer> getSets() {
+        return sets;
+    }
+
+    public void setSets(List<Integer> sets) {
+        this.sets = sets;
+
+    }
+
+    public Workout(String id, String user, String title, String description, List<String> exercises, List<Integer> sets) {
         this.id = id;
         this.user = user;
         this.title = title;
         this.description = description;
         this.exercises = exercises;
-        this.numberOfSets = numberOfSets;
+        this.sets = sets;
     }
 }
