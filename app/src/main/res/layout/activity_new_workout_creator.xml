@@ -9,7 +9,7 @@
 
 
   <TextView
-      android:id="@+id/title_workout_creating"
+      android:id="@+id/header_workout_creating"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="25dp"
@@ -41,7 +41,7 @@
       android:orientation="horizontal">
 
     <EditText
-        android:id="@+id/ejercicio_workout"
+        android:id="@+id/exercise_workout"
         android:layout_width="187dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -51,7 +51,8 @@
         android:autofillHints="" />
 
     <EditText
-        android:id="@+id/seires_workout"
+        android:id="@+id/number_sets_workout"
+        android:inputType="number"
         android:layout_width="138dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
