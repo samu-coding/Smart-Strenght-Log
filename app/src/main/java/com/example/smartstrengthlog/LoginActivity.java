@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
                             // Sign in success, update UI with the signed-in user's information
 
                             FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -95,7 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 for (QueryDocumentSnapshot snapshot : value){
                                                     SmartStrengthLogAPI smartStrengthLogAPI = SmartStrengthLogAPI.getInstance();
                                                     smartStrengthLogAPI.setUsername(snapshot.getString("username"));
-                                                    smartStrengthLogAPI.setUserId(snapshot.getString("userId"));
+                                                    //smartStrengthLogAPI.setUserId(snapshot.getString("userId"));
+                                                    smartStrengthLogAPI.setUserId(currentUserId);
                                                     Log.d("USUARIO", "usuario:" +currentUserId);
                                                 }
                                             }
@@ -105,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             //Vamos a la vista principal
                             //-------------------------->
-                            Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
 
 
 
@@ -117,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
 
                             startActivity(new Intent(LoginActivity.this, MainMenu.class));
+
                             finish();
 
 

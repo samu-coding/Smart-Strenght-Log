@@ -21,4 +21,5 @@
     <string name="exercise_Workout_hint">Exercise</string>
     <string name="sets_Workout_hint">Number of sets</string>
     <string name="title_workout_creating_text">New Workout:</string>
+    <string name="noWorkouts_hint">Create your first workouts!</string>
 </resources>
