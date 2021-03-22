@@ -2,29 +2,21 @@ package com.example.smartstrengthlog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -32,7 +24,6 @@ import java.util.List;
 
 import models.Workout;
 import ui.WorkoutRecyclerAdapter;
-import util.SmartStrengthLogAPI;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -49,13 +40,10 @@ public class MainMenu extends AppCompatActivity {
     private TextView noWorkoutEntry;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Toast.makeText(MainMenu.this, "INICIADO!", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(MainMenu.this, "INICIADO!", Toast.LENGTH_SHORT).show();
 
 
         super.onCreate(savedInstanceState);
@@ -64,7 +52,7 @@ public class MainMenu extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_workout, R.id.navigation_performance)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -102,5 +90,6 @@ public class MainMenu extends AppCompatActivity {
         finish();
 
     }
+
 
 }

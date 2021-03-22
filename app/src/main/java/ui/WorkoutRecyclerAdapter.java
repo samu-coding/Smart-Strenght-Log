@@ -42,9 +42,6 @@ public class WorkoutRecyclerAdapter extends RecyclerView.Adapter<WorkoutRecycler
         holder.title.setText(workout.getTitle());
         holder.workoutDescription.setText(workout.getDescription());
 
-
-
-
     }
 
     @Override

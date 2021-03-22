@@ -13,7 +13,7 @@
     <string name="title_activity_main_menu">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_performance">Performance</string>
     <string name="newWorkoutButton">Boton para añadir un  nuevo workout</string>
     <string name="titleWorkout_hint">Title of the workout</string>
     <string name="Description_Workout_hint">Description</string>
@@ -22,4 +22,10 @@
     <string name="sets_Workout_hint">Number of sets</string>
     <string name="title_workout_creating_text">New Workout:</string>
     <string name="noWorkouts_hint">Create your first workouts!</string>
+    <string name="title_Workout">Workout</string>
+    <string name="title_Stats">Performance</string>
+    <string name="home_tittle">All your workouts</string>
+    <string name="all_your_workouts">All your workouts:</string>
+    <string name="header_home_page">Your profile:</string>
+    <string name="image_description">Profile Image</string>
 </resources>

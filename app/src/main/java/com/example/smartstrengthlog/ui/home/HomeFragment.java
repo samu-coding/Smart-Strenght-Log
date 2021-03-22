@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment {
     private CollectionReference collectionReference = db.collection("Workout");
     private TextView noWorkoutEntry;
 
+    private TextView emailUser;
     private String userId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -66,13 +67,9 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
 
-        noWorkoutEntry = root.findViewById(R.id.list_no_workouts);
-
-        workoutList = new ArrayList<>();
-
-        recyclerView = root.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        emailUser = root.findViewById(R.id.textView_email);
+        String email = SmartStrengthLogAPI.getInstance().getUsername();
+        emailUser.setText(email);
 
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -89,62 +86,16 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        //Para poder obtener el contexto del Fragment, usamos get Activity.
-        Context HomeFragmentContext = getActivity();
-
         userId = SmartStrengthLogAPI.getInstance().getUserId();
         //SmartStrengthLogAPI.getInstance().getUsername()
-
         Log.d("USUARIO", "BUSQUEDA DOCUMENTO DE USUARIO :" +userId);
 
-
-        collectionReference.whereEqualTo("user", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-        //collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document :task.getResult()){
-
-                        Workout workout = document.toObject(Workout.class);
-                        workoutList.add(workout);
-                        Log.d("DOCU", document.getId() + "-->" + document.getData());
-
-                    }
-
-                    Toast.makeText(HomeFragmentContext, "SI ENCUENTRA WK", Toast.LENGTH_SHORT).show();
-
-                    //Invoke Recycler view
-
-                    workoutRecyclerAdapter = new WorkoutRecyclerAdapter(HomeFragmentContext,
-                            workoutList);
-                    recyclerView.setAdapter(workoutRecyclerAdapter);
-                    workoutRecyclerAdapter.notifyDataSetChanged();
-                    /*
-                    for(QueryDocumentSnapshot document :task.getResult()){
-                        Log.d("DOCU", document.getId() + "-->" + document.getData());
-                    }*/
-                }else {
-                    noWorkoutEntry.setVisibility(View.VISIBLE);
-                    Toast.makeText(HomeFragmentContext, "NO ENCUENTRA WK", Toast.LENGTH_SHORT).show();
-                    Log.d("DOCU","ERROR GETTING DOCUMENTS");
-                }
-            }
-        });
-
+        //Para poder obtener el contexto del Fragment, usamos get Activity.
+        Context HomeFragmentContext = getActivity();
 
 
     }
 
-   /* public void createWorkout (View view){
-
-        //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
-        Log.i("ERROR","Boton clicado");
-
-        Intent myIntent = new Intent(HomeFragment.this.getActivity(), NewWorkoutCreator.class);
-        startActivity(myIntent);
-        getActivity().finish();
-
-    }*/
 
 
 }

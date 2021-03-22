@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.smartstrengthlog.ui.dashboard.DashboardFragment;
+import com.example.smartstrengthlog.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -118,7 +120,10 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("userId", currentUserId);
                             startActivity(intent);
 
+                            Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
+
                             startActivity(new Intent(LoginActivity.this, MainMenu.class));
+                            //startActivity(new Intent(LoginActivity.this, DashboardFragment.class));
 
                             finish();
 
@@ -126,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Incorrect credentials, try again.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                             // ...
