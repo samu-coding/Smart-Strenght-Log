@@ -37,7 +37,7 @@ import models.Workout;
 import ui.WorkoutRecyclerAdapter;
 import util.SmartStrengthLogAPI;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements WorkoutRecyclerAdapter.OnWorkoutClickListener {
 
     private HomeViewModel homeViewModel;
     private FirebaseAuth firebaseAuth;
@@ -119,7 +119,7 @@ public class DashboardFragment extends Fragment {
                     //Invoke Recycler view
 
                     workoutRecyclerAdapter = new WorkoutRecyclerAdapter(HomeFragmentContext,
-                            workoutList);
+                            workoutList,DashboardFragment.this);
                     recyclerView.setAdapter(workoutRecyclerAdapter);
                     workoutRecyclerAdapter.notifyDataSetChanged();
                     /*
@@ -142,5 +142,10 @@ public class DashboardFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onWorkoutClick(int position) {
+        Log.d("Clicked", "onWorkoutClick: " + position);
     }
 }
