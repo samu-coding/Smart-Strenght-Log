@@ -73,6 +73,9 @@ public class WorkoutSessionLog extends AppCompatActivity {
     //Datos dobtenidos del documento
     private String name_ejercicio;
 
+    //ID del documentod el workout
+    private String documentID;
+
 
 
 
@@ -121,6 +124,8 @@ public class WorkoutSessionLog extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                documentID = document.getId();
                                 Log.d("DOCU", document.getId() + " => " + document.getData());
                                 ArrayList<String> Ejercicios = (ArrayList<String>) document.get("exercises");
                                 Log.d("DOCU","NOMBRE DEL EJERCICIOS ARRAY: "+Ejercicios);
@@ -154,27 +159,32 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
         Map<String, Object> set1 = new HashMap<>();
         set1.put("Exercise", name_ejercicio);
-        set1.put("Reps", reps_set1);
-        set1.put("Weight", weight_set1);
-        set1.put("RIR", rir_set1);
+        set1.put("Set",1);
+        set1.put("Reps", reps_set1.getText().toString());
+        set1.put("Weight", weight_set1.getText().toString());
+        set1.put("RIR", rir_set1.getText().toString());
         //set1.put("RPE", false);
-        set1.put("Date", java.time.LocalDate.now());
+        set1.put("Date", java.time.LocalDate.now().toString());
 
         Map<String, Object> set2 = new HashMap<>();
-        set1.put("Exercise", name_ejercicio);
-        set1.put("Reps", reps_set1);
-        set1.put("Weight", weight_set1);
-        set1.put("RIR", rir_set1);
+        set2.put("Exercise", name_ejercicio);
+        set2.put("Set",2);
+        set2.put("Reps", reps_set2.getText().toString());
+        set2.put("Weight", weight_set2.getText().toString());
+        set2.put("RIR", rir_set2.getText().toString());
         //set1.put("RPE", false);
-        set1.put("Date", java.time.LocalDate.now());
+        set2.put("Date", java.time.LocalDate.now().toString());
 
         Map<String, Object> set3 = new HashMap<>();
-        set1.put("Exercise", name_ejercicio);
-        set1.put("Reps", reps_set1);
-        set1.put("Weight", weight_set1);
-        set1.put("RIR", rir_set1);
+        set3.put("Exercise", name_ejercicio);
+        set3.put("Set",3);
+        set3.put("Reps", reps_set3.getText().toString());
+        set3.put("Weight", weight_set3.getText().toString());
+        set3.put("RIR", rir_set3.getText().toString());
         //set1.put("RPE", false);
-        set1.put("Date", java.time.LocalDate.now());
+        set3.put("Date", java.time.LocalDate.now().toString());
+
+        Log.d("MAPA", "info: "+set1);
 
         int numero_ej = workoutSessionAPI.getExerciseNumber();
 
@@ -208,7 +218,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
         if (numero_ej >=2){
 
-            saveSession();
+            saveSession(workoutSessionAPI);
 
         }
 
@@ -227,88 +237,96 @@ public class WorkoutSessionLog extends AppCompatActivity {
     }
 
 
-    private void saveSession() {
-       //CollectionReference collectionReference = db.collection("Workout").document(documentoWorkout).collection("History");
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void saveSession(WorkoutSessionAPI workoutSessionAPI) {
 
-       Toast.makeText(this, "Saving Workout Session...", Toast.LENGTH_SHORT).show();
+       //CollectionReference collectionReference = db.collection("Workout").document(documentID).collection("History");
 
-       startActivity(new Intent(this, MainMenu.class));
-       finish();
+        //DocumentReference documentReference = db.whereEqualTo("id", workoutId).collection("History");
 
-       //collectionReference.document(String.valueOf(java.time.LocalDate.now())).set(set1);
+        saveSet(workoutSessionAPI.getSet1_E1(),"Ejercicio 1");
+        saveSet(workoutSessionAPI.getSet2_E1(),"Ejercicio 1");
+        saveSet(workoutSessionAPI.getSet3_E1(),"Ejercicio 1");
 
+        saveSet(workoutSessionAPI.getSet1_E2(),"Ejercicio 2");
+        saveSet(workoutSessionAPI.getSet2_E2(),"Ejercicio 2");
+        saveSet(workoutSessionAPI.getSet3_E2(),"Ejercicio 2");
 
+        saveSet(workoutSessionAPI.getSet1_E3(),"Ejercicio 3");
+        saveSet(workoutSessionAPI.getSet2_E3(),"Ejercicio 3");
+        saveSet(workoutSessionAPI.getSet3_E3(),"Ejercicio 3");
 
-       /*
-        String title = titleEditText.getText().toString().trim();
-        String description = descriptionEditText.getText().toString().trim();
-        String exercise0 = exerciseEditText0.getText().toString().trim();
-        int numberOfSets0 = Integer.parseInt(numberOfSetsEditText0.getText().toString());
-        String exercise1 = exerciseEditText1.getText().toString().trim();
-        int numberOfSets1 = Integer.parseInt(numberOfSetsEditText1.getText().toString());
-        String exercise2 = exerciseEditText2.getText().toString().trim();
-        int numberOfSets2 = Integer.parseInt(numberOfSetsEditText2.getText().toString());
-
-        //Creamos las Listas de Ejercicios y sus sets
-        List<String> exercises = new ArrayList<String>();
-        List<Integer> sets = new ArrayList<Integer>();
-
-        //Añadimos ejercicios y sets
-        exercises.add(exercise0);
-        exercises.add(exercise1);
-        exercises.add(exercise2);
-        sets.add(numberOfSets0);
-        sets.add(numberOfSets1);
-        sets.add(numberOfSets2);*/
+       // Map<String, Object> Entreno = new HashMap<>();
+        //Entreno.put("Ejercicio1",workoutSessionAPI.getSet1_E1());
+        //Log.d("Entreno", "info: "+Entreno);
 
 
 
 
+        //Establecemos fecha al documento del entreno
+        DocumentReference doc = db.collection("Workout").document(documentID).collection("History").document(java.time.LocalDate.now().toString());
 
-        /*
+        doc.update("date", java.time.LocalDate.now().toString())
+        .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("UPDDATE", "ACTUALIZACIÓN EXISTOSA");
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("UPDDATE", "ACTUALIZACIÓN FRACASADA");
+            }
+        });
 
-        if (!TextUtils.isEmpty(title)){
-            //Guardamos la info del workout en FireStore
-            //.child("Workout" + Timestamp.now().getSeconds());)
+        //Añadimos la fecha al documento del History:
+        Map<String, Object> today = new HashMap<>();
+        today.put("date", java.time.LocalDate.now().toString());
+        db.collection("Workout").document(documentID).collection("History").document(java.time.LocalDate.now().toString())
+                .set(today)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("UPDATE", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("UPDATE", "Error writing document", e);
+                    }
+                });
 
-            //Create a Workout Object
-            Workout workout = new Workout();
-            workout.setId(String.valueOf(Timestamp.now().getSeconds()));
-            workout.setUser(SmartStrengthLogAPI.getInstance().getUserId());
-            workout.setTitle(title);
-            workout.setDescription(description);
-            workout.setExercises(exercises);
-            workout.setSets(sets);
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void saveSet(Map set, String numero_ejercicio){
 
-            //Invoke our CollectionReference
-            collectionReference.add(workout)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
+        //Crear fecha del documento
 
-                            startActivity(new Intent(NewWorkoutCreator.this, MainMenu.class));
-                            finish();
-                            Toast.makeText(NewWorkoutCreator.this, "Workout created!", Toast.LENGTH_LONG).show();
+        CollectionReference collectionReference = db.collection("Workout").document(documentID).collection("History").document(java.time.LocalDate.now().toString()).collection(numero_ejercicio);
+        //Test
+        collectionReference.add(set)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(WorkoutSessionLog.this, "Saving Workout Session...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(WorkoutSessionLog.this, MainMenu.class));
+                        finish();
 
-                            Log.d("CreateWokout","Error");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
 
-                        }
-                    });
+                        Log.d("CreateWokout","Error");
 
+                    }
+                });
 
-            //Save a Workout instance
-
-
-        }else{
-            Toast.makeText(this, "A tittle is required!", Toast.LENGTH_SHORT).show();
-        }*/
     }
 
 }
