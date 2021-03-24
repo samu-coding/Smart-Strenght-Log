@@ -161,8 +161,8 @@
         android:id="@+id/button_next_exercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Next Exercise"
-        android:onClick=""/>
+        android:onClick="guardarSetsEjercicio"
+        android:text="Next Exercise" />
 
 
 </LinearLayout>

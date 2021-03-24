@@ -9,7 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +36,14 @@ import java.util.Map;
 
 import models.Workout;
 import util.SmartStrengthLogAPI;
+import util.WorkoutSessionAPI;
 
 public class WorkoutSessionLog extends AppCompatActivity {
 
     private String currentUserId;
     private String currentUsername;
+
+    private String workoutId;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -94,13 +99,17 @@ public class WorkoutSessionLog extends AppCompatActivity {
         rir_set2 = findViewById(R.id.rir_2);
         rir_set3 = findViewById(R.id.rir_3);
 
+        WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
+        int numero_ej = workoutSessionAPI.getExerciseNumber();
+
+
 
 
         //We get the id of the workout
 
         //Bundle workoutId= getIntent().getExtras();
         //String id = workoutId.getString("workoutId");
-        String workoutId = (String) getIntent().getSerializableExtra("workoutId");
+        workoutId = (String) getIntent().getSerializableExtra("workoutId");
         Log.d("DOCU","ID DEL WK: "+workoutId);
 
         //Buscamos el documento (workout) que tiene el id recibido.
@@ -115,7 +124,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
                                 Log.d("DOCU", document.getId() + " => " + document.getData());
                                 ArrayList<String> Ejercicios = (ArrayList<String>) document.get("exercises");
                                 Log.d("DOCU","NOMBRE DEL EJERCICIOS ARRAY: "+Ejercicios);
-                                name_ejercicio = Ejercicios.get(0);
+                                name_ejercicio = Ejercicios.get(numero_ej);
                                 Log.d("DOCU","NOMBRE DEL EJERCICIO: "+name_ejercicio);
                                 name_exercise.setText(name_ejercicio);
 
@@ -135,15 +144,98 @@ public class WorkoutSessionLog extends AppCompatActivity {
     }
 
 
-    public void aniadirHistory(){
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void guardarSetsEjercicio(View view){
+
+        WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
+
+        Map<String, Object> set1 = new HashMap<>();
+        set1.put("Exercise", name_ejercicio);
+        set1.put("Reps", reps_set1);
+        set1.put("Weight", weight_set1);
+        set1.put("RIR", rir_set1);
+        //set1.put("RPE", false);
+        set1.put("Date", java.time.LocalDate.now());
+
+        Map<String, Object> set2 = new HashMap<>();
+        set1.put("Exercise", name_ejercicio);
+        set1.put("Reps", reps_set1);
+        set1.put("Weight", weight_set1);
+        set1.put("RIR", rir_set1);
+        //set1.put("RPE", false);
+        set1.put("Date", java.time.LocalDate.now());
+
+        Map<String, Object> set3 = new HashMap<>();
+        set1.put("Exercise", name_ejercicio);
+        set1.put("Reps", reps_set1);
+        set1.put("Weight", weight_set1);
+        set1.put("RIR", rir_set1);
+        //set1.put("RPE", false);
+        set1.put("Date", java.time.LocalDate.now());
+
+        int numero_ej = workoutSessionAPI.getExerciseNumber();
+
+        //Dependiendo del ejericcio que sea, guardamos en el API como un ejercicio u otro
+        switch(numero_ej)
+        {
+            case 0 :
+                workoutSessionAPI.setSet1_E1(set1);
+                workoutSessionAPI.setSet2_E1(set2);
+                workoutSessionAPI.setSet3_E1(set3);
+                break;
+
+            case 1 :
+                workoutSessionAPI.setSet1_E2(set1);
+                workoutSessionAPI.setSet2_E2(set2);
+                workoutSessionAPI.setSet3_E2(set3);
+                break; // break es opcional
+
+            case 2 :
+                workoutSessionAPI.setSet1_E3(set1);
+                workoutSessionAPI.setSet2_E3(set2);
+                workoutSessionAPI.setSet3_E3(set3);
+
+                break;
+
+
+        }
+
+        Log.d("NUM_EJERICIO", "valor numero_ej:  "+ numero_ej);
+        workoutSessionAPI.setExerciseNumber(numero_ej+1);
+
+        if (numero_ej >=2){
+
+            saveSession();
+
+        }
+
+        else {
+
+            //Cambio de vista
+            Intent intent = new Intent(this,
+                    WorkoutSessionLog.class);
+
+            intent.putExtra("workoutId", workoutId);
+            //Log.d("Clicked", "QUEREMOS PASAR el id:  "+ workout.getId());
+            startActivity(intent);
+        }
+
 
     }
 
 
-   @RequiresApi(api = Build.VERSION_CODES.O)
     private void saveSession() {
-       CollectionReference collectionReference = db.collection("Workout").document(documentoWorkout).collection("History");
+       //CollectionReference collectionReference = db.collection("Workout").document(documentoWorkout).collection("History");
 
+       Toast.makeText(this, "Saving Workout Session...", Toast.LENGTH_SHORT).show();
+
+       startActivity(new Intent(this, MainMenu.class));
+       finish();
+
+       //collectionReference.document(String.valueOf(java.time.LocalDate.now())).set(set1);
 
 
 
@@ -171,17 +263,10 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
 
 
-       /*
-        Map<String, Object> set1 = new HashMap<>();
-        set1.put("Exercise", name_ejercicio);
-        set1.put("Reps", reps_set1);
-        set1.put("Weight", weight_set1);
-        set1.put("RIR", rir_set1);
-        //set1.put("RPE", false);
-        set1.put("Date", java.time.LocalDate.now());
-        collectionReference.document("SF").set(set1);*/
+
 
         /*
+
         if (!TextUtils.isEmpty(title)){
             //Guardamos la info del workout en FireStore
             //.child("Workout" + Timestamp.now().getSeconds());)
@@ -223,8 +308,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
         }else{
             Toast.makeText(this, "A tittle is required!", Toast.LENGTH_SHORT).show();
-        }
-*/
+        }*/
     }
 
 }

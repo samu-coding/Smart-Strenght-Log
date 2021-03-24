@@ -40,6 +40,7 @@ import java.util.Objects;
 import models.Workout;
 import ui.WorkoutRecyclerAdapter;
 import util.SmartStrengthLogAPI;
+import util.WorkoutSessionAPI;
 
 public class DashboardFragment extends Fragment implements WorkoutRecyclerAdapter.OnWorkoutClickListener {
 
@@ -151,6 +152,8 @@ public class DashboardFragment extends Fragment implements WorkoutRecyclerAdapte
     @Override
     public void onWorkoutClick(int position) {
         //Log.d("Clicked", "onWorkoutClick: " + position);
+        WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
+        workoutSessionAPI.setExerciseNumber(0);
 
         Toast.makeText(getActivity(), "Click!", Toast.LENGTH_SHORT).show();
         Workout workout = workoutList.get(position);
