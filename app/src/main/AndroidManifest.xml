@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStrengthLog">
+        <activity android:name=".WorkoutSessionLog"></activity>
         <activity android:name=".NewWorkoutCreator" />
         <activity
             android:name=".MainMenu"

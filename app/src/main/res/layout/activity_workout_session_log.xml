@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WorkoutSessionLog">
+
+
+    <TextView
+        android:id="@+id/exercise_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/roboto_slab_bold"
+        android:gravity="center"
+        android:text="Exercise 1"
+        android:textSize="30sp" />
+
+
+
+    <TextView
+        android:id="@+id/set_number_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Set 1"
+        android:maxLines="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/reps_set_1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:inputType="number"
+            android:autofillHints=""
+            android:hint="@string/number_reps"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/weight_set_1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/weight"
+            android:inputType="number"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/rir_1"
+            android:layout_width="100dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="RIR"
+            android:inputType="number"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/set_number_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Set 1"
+        android:maxLines="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/reps_set_2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:autofillHints=""
+            android:inputType="number"
+            android:hint="@string/number_reps"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/weight_set_2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/weight"
+            android:inputType="number"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/rir_2"
+            android:layout_width="100dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="RIR"
+            android:inputType="number"
+            android:maxLines="1" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/set_number_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Set 3"
+        android:maxLines="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/reps_set_3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:autofillHints=""
+            android:inputType="number"
+            android:hint="@string/number_reps"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/weight_set_3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/weight"
+            android:inputType="number"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/rir_3"
+            android:layout_width="100dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="RIR"
+            android:inputType="number"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_next_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next Exercise"
+        android:onClick=""/>
+
+
+</LinearLayout>

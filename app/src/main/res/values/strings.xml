@@ -28,4 +28,6 @@
     <string name="all_your_workouts">All your workouts:</string>
     <string name="header_home_page">Your profile:</string>
     <string name="image_description">Profile Image</string>
+    <string name="number_reps">Reps</string>
+    <string name="weight">Weight</string>
 </resources>

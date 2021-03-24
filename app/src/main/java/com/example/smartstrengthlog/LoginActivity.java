@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
 
-                            startActivity(new Intent(LoginActivity.this, MainMenu.class));
+                            //startActivity(new Intent(LoginActivity.this, MainMenu.class));
                             //startActivity(new Intent(LoginActivity.this, DashboardFragment.class));
 
                             finish();

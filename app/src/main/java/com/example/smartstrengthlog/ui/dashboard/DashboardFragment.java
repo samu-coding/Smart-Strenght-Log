@@ -1,6 +1,7 @@
 package com.example.smartstrengthlog.ui.dashboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartstrengthlog.LoginActivity;
+import com.example.smartstrengthlog.MainMenu;
 import com.example.smartstrengthlog.R;
+import com.example.smartstrengthlog.WorkoutSessionLog;
 import com.example.smartstrengthlog.ui.home.HomeViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -146,6 +150,21 @@ public class DashboardFragment extends Fragment implements WorkoutRecyclerAdapte
 
     @Override
     public void onWorkoutClick(int position) {
-        Log.d("Clicked", "onWorkoutClick: " + position);
+        //Log.d("Clicked", "onWorkoutClick: " + position);
+
+        Toast.makeText(getActivity(), "Click!", Toast.LENGTH_SHORT).show();
+        Workout workout = workoutList.get(position);
+        Log.d("Clicked", "Workout number: "+position +" Named:"+ workout.getTitle());
+
+        //Cambio de vista
+        Intent intent = new Intent(getActivity(),
+                WorkoutSessionLog.class);
+        intent.putExtra("workoutId", workout.getId());
+        Log.d("Clicked", "QUEREMOS PASAR el id:  "+ workout.getId());
+
+        startActivity(intent);
+        //finish();
+
+        //startActivity(new Intent(getActivity(), WorkoutSessionLog.class));
     }
 }

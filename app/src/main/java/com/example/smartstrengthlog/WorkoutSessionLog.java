@@ -1,46 +1,41 @@
 package com.example.smartstrengthlog;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.Workout;
 import util.SmartStrengthLogAPI;
 
-public class NewWorkoutCreator extends AppCompatActivity {
-
-    private EditText titleEditText;
-    private EditText descriptionEditText;
-
-    private EditText exerciseEditText0;
-    private EditText numberOfSetsEditText0;
-    private EditText exerciseEditText1;
-    private EditText numberOfSetsEditText1;
-    private EditText exerciseEditText2;
-    private EditText numberOfSetsEditText2;
-
-    private TextView currentUserTextView;
+public class WorkoutSessionLog extends AppCompatActivity {
 
     private String currentUserId;
     private String currentUsername;
@@ -49,88 +44,110 @@ public class NewWorkoutCreator extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
 
+    //
+    private String documentoWorkout;
+
     //Connection to Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference collectionReference = db.collection("Workout");
     //private CollectionReference collectionReference = db.collection("Users").document(this.currentUsername).collection("Workout");
 
-    @SuppressLint("WrongViewCast")
+    private TextView name_exercise;
+
+    private EditText reps_set1;
+    private EditText reps_set2;
+    private EditText reps_set3;
+
+    private EditText weight_set1;
+    private EditText weight_set2;
+    private EditText weight_set3;
+
+    private EditText rir_set1;
+    private EditText rir_set2;
+    private EditText rir_set3;
+
+    //Datos dobtenidos del documento
+    private String name_ejercicio;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_workout_creator);
-        
-        //collectionReference
-        firebaseAuth = FirebaseAuth.getInstance();
-        titleEditText = findViewById(R.id.title_workout);
-        descriptionEditText = findViewById(R.id.description_workout);
+        setContentView(R.layout.activity_workout_session_log);
 
-        //Ejercicios
-        exerciseEditText0 = findViewById(R.id.exercise_workout0);
-        numberOfSetsEditText0 = findViewById(R.id.number_sets_workout0);
-        exerciseEditText1 = findViewById(R.id.exercise_workout1);
-        numberOfSetsEditText1 = findViewById(R.id.number_sets_workout1);
-        exerciseEditText2 = findViewById(R.id.exercise_workout2);
-        numberOfSetsEditText2 = findViewById(R.id.number_sets_workout2);
+        //Name Exercise
+        name_exercise = findViewById(R.id.exercise_name);
 
-        Log.d("Usuario","TESTING LOG D");
+        //Reps
+        reps_set1 = findViewById(R.id.reps_set_1);
+        reps_set2 = findViewById(R.id.reps_set_2);
+        reps_set3 = findViewById(R.id.reps_set_3);
 
-        if (SmartStrengthLogAPI.getInstance() != null){
-            currentUserId = SmartStrengthLogAPI.getInstance().getUserId();
-            currentUsername = SmartStrengthLogAPI.getInstance().getUsername();
-            Log.d("Usuario","User: " +currentUserId);
+        //weight
+        weight_set1 = findViewById(R.id.weight_set_1);
+        weight_set2 = findViewById(R.id.weight_set_2);
+        weight_set3 = findViewById(R.id.weight_set_3);
+
+        //RIR
+        rir_set1 = findViewById(R.id.rir_1);
+        rir_set2 = findViewById(R.id.rir_2);
+        rir_set3 = findViewById(R.id.rir_3);
 
 
-            //_____________!!!!!!!!!!!!!!!
-            //Necesario??? ->No funciona
-            //currentUserTextView.setText(currentUsername);
-        }
 
-        authStateListener= new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                user = firebaseAuth.getCurrentUser();
-                if (user != null){
+        //We get the id of the workout
 
-                }else{
+        //Bundle workoutId= getIntent().getExtras();
+        //String id = workoutId.getString("workoutId");
+        String workoutId = (String) getIntent().getSerializableExtra("workoutId");
+        Log.d("DOCU","ID DEL WK: "+workoutId);
 
-                }
-            }
-        };
+        //Buscamos el documento (workout) que tiene el id recibido.
+        db.collection("Workout")
+                .whereEqualTo("id", workoutId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("DOCU", document.getId() + " => " + document.getData());
+                                ArrayList<String> Ejercicios = (ArrayList<String>) document.get("exercises");
+                                Log.d("DOCU","NOMBRE DEL EJERCICIOS ARRAY: "+Ejercicios);
+                                name_ejercicio = Ejercicios.get(0);
+                                Log.d("DOCU","NOMBRE DEL EJERCICIO: "+name_ejercicio);
+                                name_exercise.setText(name_ejercicio);
 
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        user = firebaseAuth.getCurrentUser();
-        firebaseAuth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (firebaseAuth !=null){
-            firebaseAuth.removeAuthStateListener(authStateListener);
-        }
-    }
-
-    //Boton para crear el workout
+                            }
+                        } else {
+                            Log.d("DOCU", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
 
 
 
 
-    public void createWorkoutButton(View view){
-
-        //Save the Workout
-        saveWokout();
 
     }
 
-    private void saveWokout() {
 
+    public void aniadirHistory(){
+
+    }
+
+
+   @RequiresApi(api = Build.VERSION_CODES.O)
+    private void saveSession() {
+       CollectionReference collectionReference = db.collection("Workout").document(documentoWorkout).collection("History");
+
+
+
+
+       /*
         String title = titleEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
         String exercise0 = exerciseEditText0.getText().toString().trim();
@@ -150,9 +167,21 @@ public class NewWorkoutCreator extends AppCompatActivity {
         exercises.add(exercise2);
         sets.add(numberOfSets0);
         sets.add(numberOfSets1);
-        sets.add(numberOfSets2);
+        sets.add(numberOfSets2);*/
 
 
+
+       /*
+        Map<String, Object> set1 = new HashMap<>();
+        set1.put("Exercise", name_ejercicio);
+        set1.put("Reps", reps_set1);
+        set1.put("Weight", weight_set1);
+        set1.put("RIR", rir_set1);
+        //set1.put("RPE", false);
+        set1.put("Date", java.time.LocalDate.now());
+        collectionReference.document("SF").set(set1);*/
+
+        /*
         if (!TextUtils.isEmpty(title)){
             //Guardamos la info del workout en FireStore
             //.child("Workout" + Timestamp.now().getSeconds());)
@@ -195,9 +224,7 @@ public class NewWorkoutCreator extends AppCompatActivity {
         }else{
             Toast.makeText(this, "A tittle is required!", Toast.LENGTH_SHORT).show();
         }
-
+*/
     }
 
-
 }
-
