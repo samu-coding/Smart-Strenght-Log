@@ -30,4 +30,8 @@
     <string name="image_description">Profile Image</string>
     <string name="number_reps">Reps</string>
     <string name="weight">Weight</string>
+    <string name="no_data">--</string>
+    <string name="_TAG">Weight:</string>
+    <string name="reps_TAG">Reps:</string>
+    <string name="rir_TAG">RIR:</string>
 </resources>

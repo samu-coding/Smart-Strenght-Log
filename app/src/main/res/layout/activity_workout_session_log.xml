@@ -19,18 +19,88 @@
         android:textSize="30sp" />
 
 
-
     <TextView
         android:id="@+id/set_number_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:maxLines="1"
         android:text="Set 1"
-        android:maxLines="1" />
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/prev_marcas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Previous Session lift:"
+        android:maxLines="1"
+        android:textSize="12sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="83dp"
+        android:layout_height="46dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/reps_TAG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/reps_TAG"
+            android:maxLines="1" />
+
+
+        <TextView
+            android:id="@+id/prev_reps_set1"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/weight_TAG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_weight_set_1"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+        <TextView
+            android:id="@+id/rir_TAG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/rir_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_rir_1"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
@@ -39,9 +109,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginRight="10dp"
-            android:inputType="number"
             android:autofillHints=""
             android:hint="@string/number_reps"
+            android:inputType="number"
             android:maxLines="1" />
 
         <EditText
@@ -71,12 +141,81 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Set 1"
-        android:maxLines="1" />
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Set 2"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/prev_marcas_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Previous Session lift:"
+        android:maxLines="1"
+        android:textSize="12sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="83dp"
+        android:layout_height="46dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/reps_TAG2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/reps_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_reps_set2"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/weight_TAG2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_weight_set_2"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+        <TextView
+            android:id="@+id/rir_TAG2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/rir_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_rir_2"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
@@ -85,9 +224,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginRight="10dp"
-            android:autofillHints=""
-            android:inputType="number"
             android:hint="@string/number_reps"
+            android:inputType="number"
             android:maxLines="1" />
 
         <EditText
@@ -103,7 +241,6 @@
         <EditText
             android:id="@+id/rir_2"
             android:layout_width="100dp"
-
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="RIR"
@@ -111,17 +248,88 @@
             android:maxLines="1" />
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/set_number_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:maxLines="1"
         android:text="Set 3"
-        android:maxLines="1" />
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/prev_marcas_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Previous Session lift:"
+        android:maxLines="1"
+        android:textSize="12sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="83dp"
+        android:layout_height="46dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/reps_TAG3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/reps_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_reps_set3"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/weight_TAG3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_weight_set_3"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/rir_TAG3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/rir_TAG"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/prev_rir_3"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/no_data"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:orientation="horizontal">
 
         <EditText
@@ -131,8 +339,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="10dp"
             android:autofillHints=""
-            android:inputType="number"
             android:hint="@string/number_reps"
+            android:inputType="number"
             android:maxLines="1" />
 
         <EditText

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,12 +20,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -40,21 +44,10 @@ import util.WorkoutSessionAPI;
 
 public class WorkoutSessionLog extends AppCompatActivity {
 
-    private String currentUserId;
-    private String currentUsername;
-
     private String workoutId;
-
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
-
-    //
-    private String documentoWorkout;
 
     //Connection to Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    //private CollectionReference collectionReference = db.collection("Users").document(this.currentUsername).collection("Workout");
 
     private TextView name_exercise;
 
@@ -70,12 +63,30 @@ public class WorkoutSessionLog extends AppCompatActivity {
     private EditText rir_set2;
     private EditText rir_set3;
 
+    private Button botonSiguienteEjercicio;
+
     //Datos dobtenidos del documento
     private String name_ejercicio;
 
     //ID del documentod el workout
     private String documentID;
 
+
+    //Marcas del entrenamiento anterior
+    private TextView prev_reps_set1;
+    private TextView prev_reps_set2;
+    private TextView prev_reps_set3;
+
+    private TextView prev_weight_set1;
+    private TextView prev_weight_set2;
+    private TextView prev_weight_set3;
+
+    private TextView prev_rir_set1;
+    private TextView prev_rir_set2;
+    private TextView prev_rir_set3;
+
+    //Usado para las queries del entrenamiento anterior
+    private String ejercicio = "Ejercicio 1";
 
 
 
@@ -86,6 +97,8 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
         //Name Exercise
         name_exercise = findViewById(R.id.exercise_name);
+
+        botonSiguienteEjercicio = findViewById(R.id.button_next_exercise);
 
         //Reps
         reps_set1 = findViewById(R.id.reps_set_1);
@@ -102,18 +115,29 @@ public class WorkoutSessionLog extends AppCompatActivity {
         rir_set2 = findViewById(R.id.rir_2);
         rir_set3 = findViewById(R.id.rir_3);
 
+        //Marcas anteriores
+        //Reps anteriores
+        prev_reps_set1 = findViewById(R.id.prev_reps_set1);
+        prev_reps_set2 = findViewById(R.id.prev_reps_set2);
+        prev_reps_set3 = findViewById(R.id.prev_reps_set3);
+
+        //Weight anteriores
+        prev_weight_set1 = findViewById(R.id.prev_weight_set_1);
+        prev_weight_set2 = findViewById(R.id.prev_weight_set_2);
+        prev_weight_set3 = findViewById(R.id.prev_weight_set_3);
+
+        //RIR anteriores
+        prev_rir_set1 = findViewById(R.id.prev_rir_1);
+        prev_rir_set2 = findViewById(R.id.prev_rir_2);
+        prev_rir_set3 = findViewById(R.id.prev_rir_3);
+
+        //Invocamos nuestra API donde guardamos temporalmente la información del entreno
         WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
         int numero_ej = workoutSessionAPI.getExerciseNumber();
 
 
-
-
-        //We get the id of the workout
-
-        //Bundle workoutId= getIntent().getExtras();
-        //String id = workoutId.getString("workoutId");
+        //Obtenemos el ID del workout obtenido en la Vista anterior
         workoutId = (String) getIntent().getSerializableExtra("workoutId");
-        Log.d("DOCU","ID DEL WK: "+workoutId);
 
         //Buscamos el documento (workout) que tiene el id recibido.
         db.collection("Workout")
@@ -125,13 +149,14 @@ public class WorkoutSessionLog extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                //Guardamos los nombres de los ejercicios
                                 documentID = document.getId();
-                                Log.d("DOCU", document.getId() + " => " + document.getData());
+                                Log.d("DOCU", documentID + " => " + document.getData());
                                 ArrayList<String> Ejercicios = (ArrayList<String>) document.get("exercises");
-                                Log.d("DOCU","NOMBRE DEL EJERCICIOS ARRAY: "+Ejercicios);
                                 name_ejercicio = Ejercicios.get(numero_ej);
-                                Log.d("DOCU","NOMBRE DEL EJERCICIO: "+name_ejercicio);
                                 name_exercise.setText(name_ejercicio);
+
+                                inforPrevSessio();
 
 
                             }
@@ -141,19 +166,16 @@ public class WorkoutSessionLog extends AppCompatActivity {
                     }
                 });
 
-
-
-
-
-
+        if(numero_ej == 2) {
+            botonSiguienteEjercicio.setText("SAVE SESSION");
+        }
     }
-
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void guardarSetsEjercicio(View view){
+
+        //Guardamos la información en la API
 
         WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
 
@@ -201,7 +223,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
                 workoutSessionAPI.setSet1_E2(set1);
                 workoutSessionAPI.setSet2_E2(set2);
                 workoutSessionAPI.setSet3_E2(set3);
-                break; // break es opcional
+                break;
 
             case 2 :
                 workoutSessionAPI.setSet1_E3(set1);
@@ -213,9 +235,10 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
         }
 
-        Log.d("NUM_EJERICIO", "valor numero_ej:  "+ numero_ej);
+        //Incrementamos el numero del ejercicio
         workoutSessionAPI.setExerciseNumber(numero_ej+1);
 
+        //Si ya se han hecho todos, guardamos en Firestore
         if (numero_ej >=2){
 
             saveSession(workoutSessionAPI);
@@ -224,12 +247,10 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
         else {
 
-            //Cambio de vista
+            //Cambio de vista, recargamos para el siguiente ejercicio
             Intent intent = new Intent(this,
                     WorkoutSessionLog.class);
-
             intent.putExtra("workoutId", workoutId);
-            //Log.d("Clicked", "QUEREMOS PASAR el id:  "+ workout.getId());
             startActivity(intent);
         }
 
@@ -240,10 +261,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void saveSession(WorkoutSessionAPI workoutSessionAPI) {
 
-       //CollectionReference collectionReference = db.collection("Workout").document(documentID).collection("History");
-
-        //DocumentReference documentReference = db.whereEqualTo("id", workoutId).collection("History");
-
+        //Guardamos todos los sets
         saveSet(workoutSessionAPI.getSet1_E1(),"Ejercicio 1");
         saveSet(workoutSessionAPI.getSet2_E1(),"Ejercicio 1");
         saveSet(workoutSessionAPI.getSet3_E1(),"Ejercicio 1");
@@ -255,12 +273,6 @@ public class WorkoutSessionLog extends AppCompatActivity {
         saveSet(workoutSessionAPI.getSet1_E3(),"Ejercicio 3");
         saveSet(workoutSessionAPI.getSet2_E3(),"Ejercicio 3");
         saveSet(workoutSessionAPI.getSet3_E3(),"Ejercicio 3");
-
-       // Map<String, Object> Entreno = new HashMap<>();
-        //Entreno.put("Ejercicio1",workoutSessionAPI.getSet1_E1());
-        //Log.d("Entreno", "info: "+Entreno);
-
-
 
 
         //Establecemos fecha al documento del entreno
@@ -326,6 +338,126 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
                     }
                 });
+
+    }
+
+    //Funcion usada para buscar la info del levantamiento de la sesión anterior y aplicarlo en los TextViews
+    public void inforPrevSessio(){
+
+        //Obtenemos el numero del ejercicio y nombramos así la variable que hará referencia al id del documento
+        WorkoutSessionAPI workoutSessionAPI =WorkoutSessionAPI.getInstance();
+        int numero_ej = workoutSessionAPI.getExerciseNumber();
+        switch(numero_ej)
+        {
+            case 0 :
+                ejercicio ="Ejercicio 1";
+                break;
+
+            case 1 :
+                ejercicio ="Ejercicio 2";
+                break; // break es opcional
+
+            case 2 :
+                ejercicio ="Ejercicio 3";
+                break;
+
+
+        }
+
+        //Buscamos el documento con fecha más reciente
+        Query query = db.collection("Workout").document(documentID).collection("History")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1);
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("SEARCH", document.getId() + " => " + document.getData());
+                        String auxID = document.getId();
+
+                        //Subquery para los valores del primer set
+                        Query subQuery1 = db.collection("Workout").document(documentID).collection("History")
+                                .document(auxID).collection(ejercicio).whereEqualTo("Set",1);
+
+                        subQuery1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        prev_reps_set1.setText(document.get("Reps").toString());
+                                        prev_weight_set1.setText(document.get("Weight").toString());
+                                        prev_rir_set1.setText(document.get("RIR").toString());
+
+                                    }
+                                } else {
+                                    Log.d("SEARCH", "Error getting documents: ", task.getException());
+                                }
+
+
+                            }
+                        });
+
+                        //Subquery para los valores del segundo set
+                        Query subQuery2 = db.collection("Workout").document(documentID).collection("History")
+                                .document(auxID).collection(ejercicio).whereEqualTo("Set",2);
+
+                        subQuery2.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        prev_reps_set2.setText(document.get("Reps").toString());
+                                        prev_weight_set2.setText(document.get("Weight").toString());
+                                        prev_rir_set2.setText(document.get("RIR").toString());
+
+                                    }
+                                } else {
+                                    Log.d("SEARCH", "Error getting documents: ", task.getException());
+                                }
+
+
+                            }
+                        });
+
+                        //Subquery para los valores del tercer set
+                        Query subQuery3 = db.collection("Workout").document(documentID).collection("History")
+                                .document(auxID).collection(ejercicio).whereEqualTo("Set",3);
+
+                        subQuery3.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d("SEARCH-2", "SET 1 INFO: " + document.getData());
+                                        prev_reps_set3.setText(document.get("Reps").toString());
+                                        prev_weight_set3.setText(document.get("Weight").toString());
+                                        prev_rir_set3.setText(document.get("RIR").toString());
+
+                                    }
+                                } else {
+                                    Log.d("SEARCH", "Error getting documents: ", task.getException());
+                                }
+
+
+                            }
+                        });
+
+                    }
+                } else {
+                    Log.d("SEARCH", "Error getting documents: ", task.getException());
+                }
+
+
+            }
+        });
+
+
 
     }
 
