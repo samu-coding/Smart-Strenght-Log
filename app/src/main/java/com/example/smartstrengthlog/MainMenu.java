@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionProgress;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,7 +59,7 @@ public class MainMenu extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        noWorkoutEntry = findViewById(R.id.list_no_workouts);
+        //noWorkoutEntry = findViewById(R.id.list_no_workouts);
         //noWorkoutEntry.setVisibility(View.VISIBLE);
 
         workoutList = new ArrayList<>();
@@ -81,13 +82,23 @@ public class MainMenu extends AppCompatActivity {
 
     }
 
+    //Al clickar al botón de nuevo WK, vamos a esta pantalla
     public void createWorkout (View view){
 
         //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
-        
         Intent myIntent = new Intent(this, NewWorkoutCreator.class);
         startActivity(myIntent);
         finish();
+
+    }
+
+    public void exerciseProgress(View view){
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                RoutineSelectionProgress.class);
+        //intent.putExtra("workoutId", workout.getId());
+        //Log.d("Clicked", "QUEREMOS PASAR el id:  "+ workout.getId());
+        startActivity(intent);
 
     }
 

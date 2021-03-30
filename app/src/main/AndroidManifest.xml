@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStrengthLog">
-        <activity android:name=".WorkoutSessionLog"></activity>
+        <activity android:name=".ui.ProgressTracking.PerformanceStats"></activity>
+        <activity android:name=".ui.ProgressTracking.ExerciseSelectionProgress" />
+        <activity android:name=".ui.ProgressTracking.RoutineSelectionProgress" />
+        <activity android:name=".WorkoutSessionLog" />
         <activity android:name=".NewWorkoutCreator" />
         <activity
             android:name=".MainMenu"

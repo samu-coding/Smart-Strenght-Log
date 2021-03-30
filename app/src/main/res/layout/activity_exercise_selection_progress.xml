@@ -4,22 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#EA1414"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".ui.ProgressTracking.ExerciseSelectionProgress">
 
-    <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,13 +18,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/routine_selection2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_height="127dp"
             android:gravity="center"
-            android:text="@string/performance_intro"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/exercise_selection_text"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
 
 
@@ -50,14 +40,12 @@
             android:layout_height="90dp">
 
             <Button
-                android:id="@+id/exercise_progress_button"
-                android:text="@string/exercise_progress_text"
+                android:id="@+id/ejercicio1_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
-                android:textColor="@color/black"
-                android:onClick="exerciseProgress"></Button>
+                android:textColor="@color/black"></Button>
 
 
 
@@ -73,12 +61,11 @@
             android:layout_height="90dp">
 
             <Button
-                android:id="@+id/rm_calculator_button2"
+                android:id="@+id/ejercicio2_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
-                android:text="@string/rm_calculator_text"
                 android:textColor="@color/black"></Button>
 
         </androidx.cardview.widget.CardView>
@@ -92,8 +79,7 @@
             android:layout_height="90dp">
 
             <Button
-                android:id="@+id/export_progress_button"
-                android:text="@string/export_progress_text"
+                android:id="@+id/ejercicio3_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -106,6 +92,5 @@
 
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
