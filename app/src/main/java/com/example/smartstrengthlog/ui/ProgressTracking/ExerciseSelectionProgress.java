@@ -27,6 +27,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
     private Button name_exercise3;
 
     private String workoutId;
+    private String documentID;
 
     //Connection to Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -56,7 +57,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 //Guardamos los nombres de los ejercicios
-                                //documentID = document.getId();
+                                documentID = document.getId();
                                 //Log.d("DOCU", documentID + " => " + document.getData());
                                 ArrayList<String> Ejercicios = (ArrayList<String>) document.get("exercises");
                                 Log.d("EJERCICIOS", "Lista de ejericios:" +Ejercicios);
@@ -83,6 +84,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
                 Intent intent = new Intent(ExerciseSelectionProgress.this,
                         PerformanceStats.class);
                 intent.putExtra("workoutId", workoutId);
+                intent.putExtra("documentID", documentID);
                 intent.putExtra("exercise", name_exercise1.getText());
                 startActivity(intent);
 
@@ -98,6 +100,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
                 Intent intent = new Intent(ExerciseSelectionProgress.this,
                         PerformanceStats.class);
                 intent.putExtra("workoutId", workoutId);
+                intent.putExtra("documentID", documentID);
                 intent.putExtra("exercise", name_exercise2.getText());
                 startActivity(intent);
 
@@ -113,6 +116,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
                 Intent intent = new Intent(ExerciseSelectionProgress.this,
                         PerformanceStats.class);
                 intent.putExtra("workoutId", workoutId);
+                intent.putExtra("documentID", documentID);
                 intent.putExtra("exercise", name_exercise3.getText());
                 startActivity(intent);
 
