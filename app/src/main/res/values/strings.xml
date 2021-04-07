@@ -40,4 +40,8 @@
     <string name="export_progress_text">Export your progress to CSV</string>
     <string name="routine_selection">Select the routine that contains the exercise you want to study:</string>
     <string name="exercise_selection_text">Select the exercise you want to study:</string>
+    <string name="rm_tittle">1 RM Calculator</string>
+    <string name="reps_rm_info">Reps: Number of repetitions until muscle failure is reached.</string>
+    <string name="weight_rm_info">Wight: Weight lifted</string>
+    <string name="more_info_rm">What is this?</string>
 </resources>

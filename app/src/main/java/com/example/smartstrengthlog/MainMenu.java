@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.smartstrengthlog.ui.ProgressTracking.RmCalculator;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionProgress;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -98,6 +99,14 @@ public class MainMenu extends AppCompatActivity {
                 RoutineSelectionProgress.class);
         //intent.putExtra("workoutId", workout.getId());
         //Log.d("Clicked", "QUEREMOS PASAR el id:  "+ workout.getId());
+        startActivity(intent);
+
+    }
+
+    public void calculate1RM(View view){
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                RmCalculator.class);
         startActivity(intent);
 
     }

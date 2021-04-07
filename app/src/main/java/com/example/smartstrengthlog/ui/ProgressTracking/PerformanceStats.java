@@ -110,12 +110,6 @@ public class PerformanceStats extends AppCompatActivity {
 
                                         marcas.add(oneRM);
 
-                                        //Log.d("MARCAS ARRAY", marcas.toString());
-                                        //marcasAPI.setMarcas(marcas);
-
-                                       // prev_reps_set1.setText(document.get("Reps").toString());
-                                        //prev_weight_set1.setText(document.get("document.get("Reps").toString()").toString());
-                                        //prev_rir_set1.setText(document.get("RIR").toString());
 
                                     }
                                     //Log.d("MARCAS", marcas.toString());
@@ -140,13 +134,6 @@ public class PerformanceStats extends AppCompatActivity {
                     Log.d("MARCAS API OUT", marcasAPI.getMarcas().toString());
 
 
-
-                    //TEST
-                   // i=i+1;
-
-
-
-
                 } else {
                     Log.d("MARCAS", "Error getting documents de MARCAS: ", task.getException());
                 }
@@ -158,10 +145,6 @@ public class PerformanceStats extends AppCompatActivity {
             }
 
         });
-
-
-        //Log.d("MARCAS", "MARCA Día 1: "+ marcas.get(0));
-        //Log.d("MARCAS ARRAY", marcas.toString());
 
         mostrar_grafica_boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,11 +160,6 @@ public class PerformanceStats extends AppCompatActivity {
 
     public void crearGraph(List<Integer> marcas){
 
-        //TODO: Crear gráficas según el numero de puntos
-
-        //Crear Array de Datapoints
-        //
-
         GraphView graph = (GraphView) findViewById(R.id.graph);
         DataPoint [] dataPoints = new DataPoint[marcas.size()];
 
@@ -193,11 +171,9 @@ public class PerformanceStats extends AppCompatActivity {
         graph.addSeries(series);
 
         num_wk_grafica.setText("Analysis of the last "+marcas.size()+" sessions.");
-        
+
     }
-
-
-
+    
 
 
 }
