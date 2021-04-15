@@ -1,6 +1,8 @@
 package com.example.smartstrengthlog;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,14 +15,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
+import com.google.protobuf.StringValue;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,6 +114,40 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent(this,
                 RmCalculator.class);
         startActivity(intent);
+
+    }
+
+    public void exportData(View view){
+
+        StringBuilder data = new StringBuilder();
+        data.append("Time,Distance");
+
+        for (int i  =0; i<5; i++){
+            data.append("\n" + String.valueOf(i)+","+String.valueOf(i*i));
+        }
+
+        try {
+            //save file
+            FileOutputStream out = openFileOutput("WorkoutData.csv", Context.MODE_PRIVATE);
+            out.write(data.toString().getBytes());
+            out.close();
+
+            //export
+            Context context = getApplicationContext();
+            File filelocation = new File (getFilesDir(), "WorkoutData.csv");
+            Uri path = FileProvider.getUriForFile(context, "com.example.smartstrenghtlog.fileprovider", filelocation);
+            Intent fileIntent = new Intent (Intent.ACTION_SEND);
+            fileIntent.setType("text/csv");
+            fileIntent.putExtra(fileIntent.EXTRA_SUBJECT, "Data");
+            fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            fileIntent.putExtra(Intent.EXTRA_STREAM, path);
+            startActivity(Intent.createChooser(fileIntent,"Send mail"));
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 

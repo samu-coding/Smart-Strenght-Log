@@ -44,4 +44,10 @@
     <string name="reps_rm_info">Reps: Number of repetitions until muscle failure is reached.</string>
     <string name="weight_rm_info">Wight: Weight lifted</string>
     <string name="more_info_rm">What is this?</string>
+    <string name="how_stats">Graph info</string>
+    <string name="ExportdataTitle">Export Your Workout Data</string>
+    <string name="texto_ExportData_guia">Smart Streght Log saves all your information in the cloud, but you can obtain all your information, saving the data to a "csv" file.</string>
+    <string name="texto_ExportData_guia_2">You can either save directly the file to your Google Drive or send it by email.</string>
+
+
 </resources>

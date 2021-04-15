@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smartstrengthlog.R;
+import com.example.smartstrengthlog.WorkoutSessionLog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,7 +25,10 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import util.MarcasAPI;
@@ -43,12 +47,16 @@ public class PerformanceStats extends AppCompatActivity {
     private TextView num_wk_grafica;
     private Button mostrar_grafica_boton;
 
+    private Button botonInfo;
+
 
     //Connection to Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //Guardado de marcas
     List<Integer> marcas =new ArrayList<>();
+
+    List<Date> diaWKSession =new ArrayList<>();
 
 
     //test
@@ -68,7 +76,15 @@ public class PerformanceStats extends AppCompatActivity {
         name_exercise = (String) getIntent().getSerializableExtra("exercise");
         documentID = (String) getIntent().getSerializableExtra("documentID");
 
-        name_exercise_Title.setText(name_exercise);
+        name_exercise_Title.setText(name_exercise + " Performance:");
+
+        botonInfo = findViewById(R.id.button_more_info_stats);
+        botonInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
 
 
         MarcasAPI marcasAPI = MarcasAPI.getInstance();
@@ -108,12 +124,30 @@ public class PerformanceStats extends AppCompatActivity {
 
                                         int oneRM = (int) (weight * (1+(0.033 * reps)));
 
+                                        String diaString = document.get("Date").toString();
+
+                                        Date dateaso = null;
+                                        try {
+                                            dateaso = new SimpleDateFormat("YYYY-MM-dd").parse(diaString);
+                                            Log.d("Dateaso","EXITO " + dateaso);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                            Log.d("Dateaso","ERROR EN LA CONVERSION QUE CABRON" + dateaso);
+                                        }
+
+
+                                        diaWKSession.add(dateaso);
+
+                                        //Date dia = dateFormat.parse(diaString);
+
                                         marcas.add(oneRM);
+
 
 
                                     }
                                     //Log.d("MARCAS", marcas.toString());
                                     marcasAPI.setMarcas(marcas);
+                                    marcasAPI.setDates(diaWKSession);
                                     Log.d("MARCAS API IN", marcasAPI.getMarcas().toString());
 
                                 }
@@ -121,14 +155,8 @@ public class PerformanceStats extends AppCompatActivity {
                                 else {
                                     Log.d("MARCAS", "Error getting MARCAS: ", task.getException());
                                 }
-
                             }
-
-
-
                         });
-
-
 
                     }
                     Log.d("MARCAS API OUT", marcasAPI.getMarcas().toString());
@@ -149,7 +177,7 @@ public class PerformanceStats extends AppCompatActivity {
         mostrar_grafica_boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crearGraph(marcasAPI.getMarcas());
+                crearGraph(marcasAPI.getMarcas(), marcasAPI.getDates());
             }
         });
 
@@ -158,13 +186,13 @@ public class PerformanceStats extends AppCompatActivity {
     }
 
 
-    public void crearGraph(List<Integer> marcas){
+    public void crearGraph(List<Integer> marcas, List<Date> diaWKSession){
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         DataPoint [] dataPoints = new DataPoint[marcas.size()];
 
         for (int i =0; i<marcas.size(); i++){
-            dataPoints [i] = new DataPoint(i,marcas.get(i));
+            dataPoints [i] = new DataPoint((i),marcas.get(i));
         }
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
         series.setColor(Color.RED);
@@ -173,8 +201,12 @@ public class PerformanceStats extends AppCompatActivity {
         num_wk_grafica.setText("Analysis of the last "+marcas.size()+" sessions.");
 
     }
-    
 
+    public void openDialog(){
+        InfoStatsDialog infoStatsDialog = new InfoStatsDialog();
+        infoStatsDialog.show(getSupportFragmentManager(),"Dialog");
+
+    }
 
 }
 
