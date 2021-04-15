@@ -21,27 +21,42 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.049" />
 
+    <Button
+        android:id="@+id/button_more_info_stats"
+        android:layout_width="179dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="buttonPress"
+        android:text="@string/how_stats"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_name_stats_Title" />
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
-        android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_height="200dip"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exercise_name_stats_Title"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintVertical_bias="0.197" />
 
     <Button
         android:id="@+id/show_graph_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:text="SHOW PROGRESS"
-        app:layout_constraintBottom_toTopOf="@+id/graph"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exercise_name_stats_Title" />
+        app:layout_constraintTop_toBottomOf="@+id/graph" />
 
     <TextView
         android:id="@+id/number_of_wk_graph"
@@ -52,7 +67,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graph"
-        app:layout_constraintVertical_bias="0.269" />
+        app:layout_constraintVertical_bias="0.475" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
