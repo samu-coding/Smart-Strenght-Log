@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStrengthLog">
-        <activity android:name=".ui.ProgressTracking.ExportData"></activity>
+        <activity android:name=".ui.ProgressTracking.RoutineSelectionExportData" />
+        <activity android:name=".ui.ProgressTracking.ExportData" />
         <activity android:name=".ui.ProgressTracking.RmCalculator" />
         <activity android:name=".ui.ProgressTracking.PerformanceStats" />
         <activity android:name=".ui.ProgressTracking.ExerciseSelectionProgress" />
