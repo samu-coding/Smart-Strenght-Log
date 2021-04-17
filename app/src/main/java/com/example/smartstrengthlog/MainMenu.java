@@ -1,13 +1,12 @@
 package com.example.smartstrengthlog;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.smartstrengthlog.ui.ProgressTracking.RmCalculator;
+import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionExportData;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionProgress;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,18 +14,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
-import com.google.protobuf.StringValue;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,8 +98,6 @@ public class MainMenu extends AppCompatActivity {
         //Cambio de vista
         Intent intent = new Intent(this,
                 RoutineSelectionProgress.class);
-        //intent.putExtra("workoutId", workout.getId());
-        //Log.d("Clicked", "QUEREMOS PASAR el id:  "+ workout.getId());
         startActivity(intent);
 
     }
@@ -119,35 +112,9 @@ public class MainMenu extends AppCompatActivity {
 
     public void exportData(View view){
 
-        StringBuilder data = new StringBuilder();
-        data.append("Time,Distance");
-
-        for (int i  =0; i<5; i++){
-            data.append("\n" + String.valueOf(i)+","+String.valueOf(i*i));
-        }
-
-        try {
-            //save file
-            FileOutputStream out = openFileOutput("WorkoutData.csv", Context.MODE_PRIVATE);
-            out.write(data.toString().getBytes());
-            out.close();
-
-            //export
-            Context context = getApplicationContext();
-            File filelocation = new File (getFilesDir(), "WorkoutData.csv");
-            Uri path = FileProvider.getUriForFile(context, "com.example.smartstrenghtlog.fileprovider", filelocation);
-            Intent fileIntent = new Intent (Intent.ACTION_SEND);
-            fileIntent.setType("text/csv");
-            fileIntent.putExtra(fileIntent.EXTRA_SUBJECT, "Data");
-            fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            fileIntent.putExtra(Intent.EXTRA_STREAM, path);
-            startActivity(Intent.createChooser(fileIntent,"Send mail"));
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+        Intent intent = new Intent(this,
+                RoutineSelectionExportData.class);
+        startActivity(intent);
 
     }
 

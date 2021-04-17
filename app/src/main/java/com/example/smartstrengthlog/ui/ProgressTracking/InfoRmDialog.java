@@ -20,7 +20,7 @@ public class InfoRmDialog extends AppCompatDialogFragment {
                 .setMessage("This is a calculator that uses the Epley & Welday Formula (very precise when 10 < reps < 15) to estimate your " +
                         "1RM (One-repetition maximum).\n 1RM in weight training is " +
                         "the maximum amount of weight that a person can possibly lift for one" +
-                        " repetition. \n\n DISCLAIMER: This is just a theoretical approach for the user´s " +
+                        " repetition. \n\nDISCLAIMER: This is just a theoretical approach for the user´s " +
                         "guidance. Smart Strength Log does not hold any responsibility over the usage of this information.")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
