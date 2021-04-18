@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     xmlns:tools="http://schemas.android.com/tools"
@@ -127,12 +128,24 @@
         <EditText
             android:id="@+id/rir_1"
             android:layout_width="100dp"
-
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="RIR"
             android:inputType="number"
             android:maxLines="1" />
+
+        <ImageView
+            android:id="@+id/RIR_info"
+            android:layout_width="18dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:hint="RIR"
+            android:inputType="number"
+            android:maxLines="1"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/question_mark_icon"
+            />
+
 
     </LinearLayout>
 

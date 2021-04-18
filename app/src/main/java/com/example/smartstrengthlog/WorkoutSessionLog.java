@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +18,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartstrengthlog.ui.Dialogs.InfoRmDialog;
+import com.example.smartstrengthlog.ui.Dialogs.InfoWKSessionRIR;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,11 +89,15 @@ public class WorkoutSessionLog extends AppCompatActivity {
     private TextView prev_rir_set2;
     private TextView prev_rir_set3;
 
+    //Info
+    private View RIRInfo;
+
     //Usado para las queries del entrenamiento anterior
     private String ejercicio = "Ejercicio 1";
 
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +138,14 @@ public class WorkoutSessionLog extends AppCompatActivity {
         prev_rir_set1 = findViewById(R.id.prev_rir_1);
         prev_rir_set2 = findViewById(R.id.prev_rir_2);
         prev_rir_set3 = findViewById(R.id.prev_rir_3);
+
+        RIRInfo = findViewById(R.id.RIR_info);
+        RIRInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogRIR();
+            }
+        });
 
         //Invocamos nuestra API donde guardamos temporalmente la información del entreno
         WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
@@ -458,6 +474,12 @@ public class WorkoutSessionLog extends AppCompatActivity {
         });
 
 
+
+    }
+
+    public void openDialogRIR(){
+        InfoWKSessionRIR infoWKSessionRIR = new InfoWKSessionRIR();
+        infoWKSessionRIR.show(getSupportFragmentManager(),"Dialog");
 
     }
 

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Smart Strength Log</string>
-    <string name="title_text">Smart Strength Log</string>
+    <string name="title_text">Welcome to:</string>
     <string name="quote_text">Train smarter, get stronger.</string>
     <string name="getstartedtex">Get started</string>
     <string name="email_hint">Email</string>
@@ -50,6 +50,9 @@
     <string name="texto_ExportData_guia_2">You can either save directly the file to your Google Drive or send it by email.</string>
     <string name="routine_selection_ExportData">Select the routine you want to export Data from</string>
     <string name="create_wk_button">Create Workout</string>
+    <string name="button_CreateAccount_Title">Let´s start!</string>
+    <string name="all_your_workouts_explain">Create a new workout or click on an existing one to start workoing out.</string>
+    <string name="Log_in_Title">Sign-In</string>
 
 
 </resources>
