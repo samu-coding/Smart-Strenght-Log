@@ -1,4 +1,4 @@
-package com.example.smartstrengthlog.ui.ProgressTracking;
+package com.example.smartstrengthlog.ui.Dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -28,8 +28,6 @@ public class InfoRmDialog extends AppCompatDialogFragment {
 
                     }
                 });
-
-
 
         return  builder.create();
     }
