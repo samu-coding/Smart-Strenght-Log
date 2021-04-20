@@ -36,6 +36,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -326,6 +327,23 @@ public class WorkoutSessionLog extends AppCompatActivity {
                     }
                 });
 
+        // Guardar la fecha del ultimo WK en el documento de entrenamientos
+        DocumentReference subQueryDate = db.collection("Workout").document(documentID);
+        subQueryDate
+                .update("LastWorkout", LocalDate.now().toString())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("FECHA LW", "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("FECHA LW", "Error updating document", e);
+                    }
+                });
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -386,6 +404,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
                 .limit(1);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
@@ -463,6 +482,9 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
                             }
                         });
+
+
+
 
                     }
                 } else {

@@ -130,7 +130,7 @@ public class PerformanceStats extends AppCompatActivity {
                                             Log.d("Dateaso","EXITO " + dateaso);
                                         } catch (ParseException e) {
                                             e.printStackTrace();
-                                            Log.d("Dateaso","ERROR EN LA CONVERSION QUE CABRON" + dateaso);
+                                            Log.d("Dateaso","ERROR EN LA CONVERSION" + dateaso);
                                         }
 
 
