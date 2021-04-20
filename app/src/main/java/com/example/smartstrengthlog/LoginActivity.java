@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     smartStrengthLogAPI.setUsername(snapshot.getString("username"));
                                                     //smartStrengthLogAPI.setUserId(snapshot.getString("userId"));
                                                     smartStrengthLogAPI.setUserId(currentUserId);
-                                                    Log.d("USUARIO", "usuario:" +currentUserId);
+                                                    //Log.d("USUARIO", "usuario:" +currentUserId);
                                                 }
                                             }
                                         }
