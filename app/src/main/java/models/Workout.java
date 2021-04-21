@@ -9,13 +9,17 @@ public class Workout {
     public String user; //Foreign key
     public String title;
     public String description;
+
     List<String> exercises = new ArrayList<String>();
     List<Integer> sets = new ArrayList<Integer>();
-
-
+    List<String> notes = new ArrayList<String>();
 
     public Workout() { //Necesario la Firestore
     }
+
+    public List<String> getNotes() { return notes; }
+
+    public void setNotes(List<String> notes) { this.notes = notes; }
 
     public String getId() {
         return id;
@@ -67,12 +71,13 @@ public class Workout {
 
     }
 
-    public Workout(String id, String user, String title, String description, List<String> exercises, List<Integer> sets) {
+    public Workout(String id, String user, String title, String description, List<String> exercises, List<Integer> sets, List <String> notes) {
         this.id = id;
         this.user = user;
         this.title = title;
         this.description = description;
         this.exercises = exercises;
         this.sets = sets;
+        this.notes = notes;
     }
 }

@@ -35,10 +35,13 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
     private EditText exerciseEditText0;
     private EditText numberOfSetsEditText0;
+    private EditText notesExerciseEditText0;
     private EditText exerciseEditText1;
     private EditText numberOfSetsEditText1;
+    private EditText notesExerciseEditText1;
     private EditText exerciseEditText2;
     private EditText numberOfSetsEditText2;
+    private EditText notesExerciseEditText2;
 
     private TextView currentUserTextView;
 
@@ -68,10 +71,13 @@ public class NewWorkoutCreator extends AppCompatActivity {
         //Ejercicios
         exerciseEditText0 = findViewById(R.id.exercise_workout0);
         numberOfSetsEditText0 = findViewById(R.id.number_sets_workout0);
+        notesExerciseEditText0 = findViewById(R.id.description_exercise_workout0);
         exerciseEditText1 = findViewById(R.id.exercise_workout1);
         numberOfSetsEditText1 = findViewById(R.id.number_sets_workout1);
+        notesExerciseEditText1 = findViewById(R.id.description_exercise_workout1);
         exerciseEditText2 = findViewById(R.id.exercise_workout2);
         numberOfSetsEditText2 = findViewById(R.id.number_sets_workout2);
+        notesExerciseEditText2 = findViewById(R.id.description_exercise_workout2);
 
         Log.d("Usuario","TESTING LOG D");
 
@@ -80,10 +86,6 @@ public class NewWorkoutCreator extends AppCompatActivity {
             currentUsername = SmartStrengthLogAPI.getInstance().getUsername();
             Log.d("Usuario","User: " +currentUserId);
 
-
-            //_____________!!!!!!!!!!!!!!!
-            //Necesario??? ->No funciona
-            //currentUserTextView.setText(currentUsername);
         }
 
         authStateListener= new FirebaseAuth.AuthStateListener() {
@@ -133,21 +135,29 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
         String title = titleEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
+
         String exercise0 = exerciseEditText0.getText().toString().trim();
+        String descriptionExercise0 = notesExerciseEditText0.getText().toString().trim();
         int numberOfSets0 = Integer.parseInt(numberOfSetsEditText0.getText().toString());
         String exercise1 = exerciseEditText1.getText().toString().trim();
+        String descriptionExercise1 = notesExerciseEditText1.getText().toString().trim();
         int numberOfSets1 = Integer.parseInt(numberOfSetsEditText1.getText().toString());
         String exercise2 = exerciseEditText2.getText().toString().trim();
+        String descriptionExercise2 = notesExerciseEditText2.getText().toString().trim();
         int numberOfSets2 = Integer.parseInt(numberOfSetsEditText2.getText().toString());
 
         //Creamos las Listas de Ejercicios y sus sets
         List<String> exercises = new ArrayList<String>();
+        List<String> notesExercises = new ArrayList<String>();
         List<Integer> sets = new ArrayList<Integer>();
 
         //Añadimos ejercicios y sets
         exercises.add(exercise0);
         exercises.add(exercise1);
         exercises.add(exercise2);
+        notesExercises.add(descriptionExercise0);
+        notesExercises.add(descriptionExercise1);
+        notesExercises.add(descriptionExercise2);
         sets.add(numberOfSets0);
         sets.add(numberOfSets1);
         sets.add(numberOfSets2);
@@ -165,6 +175,8 @@ public class NewWorkoutCreator extends AppCompatActivity {
             workout.setDescription(description);
             workout.setExercises(exercises);
             workout.setSets(sets);
+            workout.setNotes(notesExercises);
+
 
 
             //Invoke our CollectionReference
