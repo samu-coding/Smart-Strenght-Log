@@ -55,6 +55,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private TextView name_exercise;
+    private TextView exerciseNotes;
 
     private EditText reps_set1;
     private EditText reps_set2;
@@ -72,6 +73,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
     //Datos dobtenidos del documento
     private String name_ejercicio;
+    private String notesThisExercise;
 
     //ID del documentod el workout
     private String documentID;
@@ -106,6 +108,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
         //Name Exercise
         name_exercise = findViewById(R.id.exercise_name);
+        exerciseNotes = findViewById(R.id.exercise_notes);
 
         botonSiguienteEjercicio = findViewById(R.id.button_next_exercise);
 
@@ -171,7 +174,18 @@ public class WorkoutSessionLog extends AppCompatActivity {
                                 Log.d("DOCU", documentID + " => " + document.getData());
                                 ArrayList<String> Ejercicios = (ArrayList<String>) document.get("exercises");
                                 name_ejercicio = Ejercicios.get(numero_ej);
-                                name_exercise.setText(name_ejercicio);
+                                name_exercise.setText(name_ejercicio); //Mostramos el correspontiente
+
+
+                                //Guardamos las notas de los ejericios
+                                ArrayList<String> notes = (ArrayList<String>) document.get("notes");
+
+                                if (notes != null){
+                                    notesThisExercise =  notes.get(numero_ej);
+                                    exerciseNotes.setText(notesThisExercise); //Mostramos la correspontiente
+                                }
+
+
 
                                 inforPrevSessio();
 

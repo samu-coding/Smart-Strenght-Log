@@ -55,4 +55,5 @@
     <string name="all_your_workouts_explain">Create a new workout or click on an existing one to start wroking out.</string>
     <string name="header_last_WK">Last workouts done:</string>
     <string name="No_info_last_WK">No info available.</string>
+    <string name="description_exercise_Workout_hint">Notes (rep range, technique, ect)</string>
 </resources>

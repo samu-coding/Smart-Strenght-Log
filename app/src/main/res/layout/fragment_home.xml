@@ -91,7 +91,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:textSize="14sp"
-                    android:hint="@string/No_info_last_WK"/>
+                    android:hint="@string/No_info_last_WK"
+                    android:textAlignment="center"/>
 
                 <TextView
                     android:id="@+id/last_2_WK"
@@ -99,7 +100,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text=""
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textAlignment="center"/>
 
                 <TextView
                     android:id="@+id/last_3_WK"
@@ -107,7 +109,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text=""
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textAlignment="center"/>
 
 
             </LinearLayout>
