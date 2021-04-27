@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.smartstrengthlog.MainMenu;
 import com.example.smartstrengthlog.R;
 import com.example.smartstrengthlog.WorkoutSessionLog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +20,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import util.SmartStrengthLogAPI;
 
 public class ExerciseSelectionProgress extends AppCompatActivity {
 
@@ -123,10 +126,15 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
+    }
+    @Override
+    public void onBackPressed() {
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                MainMenu.class);
+        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+        intent.putExtra("username", smartStrengthLogAPI.getUsername());
+        intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+        startActivity(intent);
     }
 }

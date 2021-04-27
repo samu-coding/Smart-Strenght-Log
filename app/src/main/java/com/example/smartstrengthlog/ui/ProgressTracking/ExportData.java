@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.smartstrengthlog.MainMenu;
 import com.example.smartstrengthlog.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +24,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+
+import util.SmartStrengthLogAPI;
 
 public class ExportData extends AppCompatActivity {
 
@@ -183,5 +186,16 @@ public class ExportData extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                MainMenu.class);
+        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+        intent.putExtra("username", smartStrengthLogAPI.getUsername());
+        intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+        startActivity(intent);
     }
 }

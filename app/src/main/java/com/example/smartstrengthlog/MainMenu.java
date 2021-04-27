@@ -27,6 +27,7 @@ import java.util.List;
 
 import models.Workout;
 import ui.WorkoutRecyclerAdapter;
+import util.SmartStrengthLogAPI;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -48,7 +49,6 @@ public class MainMenu extends AppCompatActivity {
 
        // Toast.makeText(MainMenu.this, "INICIADO!", Toast.LENGTH_SHORT).show();
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -65,17 +65,8 @@ public class MainMenu extends AppCompatActivity {
         //noWorkoutEntry.setVisibility(View.VISIBLE);
 
         workoutList = new ArrayList<>();
-
         recyclerView = findViewById(R.id.recyclerView);
-        //recyclerView.setHasFixedSize(true);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //Gracias a la API podemos coger el usuario o el id cuando queramos
-        //SmartStrengthLogAPI.getInstance().getUserId();
-        //SmartStrengthLogAPI.getInstance().getUsername()
-
-    }
-
+      }
 
     public void logOut (View view){
 
@@ -116,6 +107,11 @@ public class MainMenu extends AppCompatActivity {
                 RoutineSelectionExportData.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 

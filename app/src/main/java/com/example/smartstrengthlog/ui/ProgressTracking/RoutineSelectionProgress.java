@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartstrengthlog.MainMenu;
 import com.example.smartstrengthlog.R;
 import com.example.smartstrengthlog.WorkoutSessionLog;
 import com.example.smartstrengthlog.ui.dashboard.DashboardFragment;
@@ -153,4 +154,5 @@ public class RoutineSelectionProgress extends AppCompatActivity implements Worko
             }
         });
     }
+
 }

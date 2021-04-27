@@ -210,6 +210,17 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                MainMenu.class);
+        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+        intent.putExtra("username", smartStrengthLogAPI.getUsername());
+        intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+        startActivity(intent);
+    }
+
 
 }
 

@@ -3,6 +3,8 @@ package com.example.smartstrengthlog.ui.ProgressTracking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationChannelGroup;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.smartstrengthlog.LoginActivity;
+import com.example.smartstrengthlog.MainMenu;
 import com.example.smartstrengthlog.R;
 import com.example.smartstrengthlog.WorkoutSessionLog;
 import com.example.smartstrengthlog.ui.Dialogs.InfoStatsDialog;
+import com.example.smartstrengthlog.ui.notifications.NotificationsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 import util.MarcasAPI;
+import util.SmartStrengthLogAPI;
 
 import static java.lang.Integer.parseInt;
 
@@ -59,6 +65,18 @@ public class PerformanceStats extends AppCompatActivity {
 
     //test
     private int i =0;
+
+    @Override
+    public void onBackPressed() {
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                MainMenu.class);
+        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+        intent.putExtra("username", smartStrengthLogAPI.getUsername());
+        intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+        startActivity(intent);
+        //super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
