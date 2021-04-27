@@ -6,17 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
+
+
     <TextView
-        android:id="@+id/text_dashboard"
+        android:id="@+id/all_yourWK_Title"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="30sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/all_your_workouts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/all_yourWK_explain"
+        android:layout_width="377dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/all_your_workouts_explain"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/all_yourWK_Title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="411dp"
+        android:layout_height="576dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/all_yourWK_explain">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/newWorkoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/newWorkoutButton"
+        android:focusable="true"
+        android:onClick="createWorkout"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.885" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

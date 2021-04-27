@@ -10,7 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStrengthLog">
-        <activity android:name=".NewWorkoutCreator"></activity>
+        <activity android:name=".ui.ProgressTracking.RoutineSelectionExportData" />
+        <activity android:name=".ui.ProgressTracking.ExportData" />
+        <activity android:name=".ui.ProgressTracking.RmCalculator" />
+        <activity android:name=".ui.ProgressTracking.PerformanceStats" />
+        <activity android:name=".ui.ProgressTracking.ExerciseSelectionProgress" />
+        <activity android:name=".ui.ProgressTracking.RoutineSelectionProgress" />
+        <activity android:name=".WorkoutSessionLog" />
+        <activity android:name=".NewWorkoutCreator" />
         <activity
             android:name=".MainMenu"
             android:label="@string/title_activity_main_menu" />
@@ -22,8 +29,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
+        </activity> <!-- -Export csv data -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.smartstrenghtlog.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider> <!--  -->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

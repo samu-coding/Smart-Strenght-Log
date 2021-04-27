@@ -31,7 +31,7 @@ import util.SmartStrengthLogAPI;
 public class CreateAccountActivity extends AppCompatActivity {
 
     //Firebase Auth
-    private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
 
@@ -56,7 +56,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         rePasswordEditText = findViewById(R.id.repassword_CreateAccount);
 
         // Inicializamos Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -79,9 +79,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = mAuth.getCurrentUser();
-        currentUser = mAuth.getCurrentUser();
+        currentUser = firebaseAuth.getCurrentUser();
         updateUI(currentUser);
-        mAuth.addAuthStateListener(authStateListener);
+        firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     private void updateUI(FirebaseUser currentUser) {
@@ -89,14 +89,14 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public void createUserWithEmailAndPassword (String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SUCCESS", "createUserWithEmail:success");
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
                     updateUI(user);
 
                     //Firestore creation
@@ -128,11 +128,13 @@ public class CreateAccountActivity extends AppCompatActivity {
 
 
                                                         //Cambio de vista
+                                                        Toast.makeText(CreateAccountActivity.this, "Welcome to Smart Strength Log!", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(CreateAccountActivity.this,
                                                                 MainMenu.class);
                                                         intent.putExtra("username", email);
                                                         intent.putExtra("userId", userId);
                                                         startActivity(intent);
+                                                        finish();
 
 
                                                     }else {

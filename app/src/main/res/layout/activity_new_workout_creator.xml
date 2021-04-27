@@ -8,75 +8,177 @@
     tools:context=".NewWorkoutCreator">
 
 
-
-  <LinearLayout
-      android:id="@+id/acct_login_form"
+  <TextView
+      android:id="@+id/header_Home_Page"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="25dp"
+      android:fontFamily="@font/roboto_slab_bold"
+      android:gravity="center"
+      android:text="@string/title_workout_creating_text"
+      android:textSize="30sp" />
+
+  <EditText
+      android:id="@+id/title_workout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:hint="@string/titleWorkout_hint"
+      android:maxLines="1"
+      android:importantForAutofill="no" />
+
+  <EditText
+      android:id="@+id/description_workout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:hint="@string/Description_Workout_hint"
+      android:maxLines="1" />
+
+  <LinearLayout
+      android:layout_width="369dp"
+      android:layout_height="149dp"
       android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title_workout_creating"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/roboto_slab_bold"
-        android:text="@string/title_workout_creating_text"
-        android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/title_workout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/titleWorkout_hint"
-        android:maxLines="1" />
-
-    <EditText
-        android:id="@+id/description_workout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/Description_Workout_hint"
-        android:maxLines="1" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="364dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
       <EditText
-          android:id="@+id/ejercicio_workout"
+          android:id="@+id/exercise_workout0"
           android:layout_width="187dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="16dp"
           android:layout_marginRight="10dp"
+          android:autofillHints=""
           android:hint="@string/exercise_Workout_hint"
           android:maxLines="1" />
 
       <EditText
-          android:id="@+id/seires_workout"
+          android:id="@+id/number_sets_workout0"
           android:layout_width="138dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="16dp"
           android:hint="@string/sets_Workout_hint"
+          android:inputType="number"
           android:maxLines="1" />
+
+
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/button_create_workout"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/description_exercise_workout0"
+        android:layout_width="357dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:onClick="createWorkout"
-        android:text="@string/button_create_workout_text"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="10dp"
+        android:autofillHints=""
+        android:hint="@string/description_exercise_Workout_hint"
+        android:maxLines="1" />
   </LinearLayout>
+
+
+  <LinearLayout
+      android:layout_width="369dp"
+      android:layout_height="149dp"
+      android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="364dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+      <EditText
+          android:id="@+id/exercise_workout1"
+          android:layout_width="187dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:layout_marginRight="10dp"
+          android:autofillHints=""
+          android:hint="@string/exercise_Workout_hint"
+          android:maxLines="1" />
+
+      <EditText
+          android:id="@+id/number_sets_workout1"
+          android:layout_width="138dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:hint="@string/sets_Workout_hint"
+          android:inputType="number"
+          android:maxLines="1" />
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/description_exercise_workout1"
+        android:layout_width="357dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="10dp"
+        android:autofillHints=""
+        android:hint="@string/description_exercise_Workout_hint"
+        android:maxLines="1" />
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="369dp"
+      android:layout_height="149dp"
+      android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="364dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+      <EditText
+          android:id="@+id/exercise_workout2"
+          android:layout_width="187dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:layout_marginRight="10dp"
+          android:autofillHints=""
+          android:hint="@string/exercise_Workout_hint"
+          android:maxLines="1" />
+
+      <EditText
+          android:id="@+id/number_sets_workout2"
+          android:layout_width="138dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:hint="@string/sets_Workout_hint"
+          android:inputType="number"
+          android:maxLines="1" />
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/description_exercise_workout2"
+        android:layout_width="357dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="10dp"
+        android:autofillHints=""
+        android:hint="@string/description_exercise_Workout_hint"
+        android:maxLines="1" />
+  </LinearLayout>
+
+
+
+  <Button
+      android:id="@+id/button2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/create_wk_button"
+      android:onClick="createWorkoutButton"/>
 
 
 </LinearLayout>

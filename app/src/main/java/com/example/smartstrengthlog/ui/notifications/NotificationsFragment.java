@@ -1,6 +1,8 @@
 package com.example.smartstrengthlog.ui.notifications;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.smartstrengthlog.R;
+import com.example.smartstrengthlog.WorkoutSessionLog;
+import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionProgress;
 
 public class NotificationsFragment extends Fragment {
 
@@ -32,4 +36,7 @@ public class NotificationsFragment extends Fragment {
         });
         return root;
     }
+
+
+
 }
