@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,9 +44,10 @@ public class RmCalculator extends AppCompatActivity {
 
                 if (!repes.isEmpty() && !peso.isEmpty()) {
 
-                    int RM1 = (int) (Integer.parseInt(peso) * (1 + (0.033 * Integer.parseInt(repes))));
+                    float RM1 = (float) (Float.parseFloat(peso) * (1 + (0.033 * Float.parseFloat(repes))));
                     rmcalculado.setText("Your 1RM is: "+RM1+ " kg.");
-
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
 
                 } else {
                     Toast.makeText(RmCalculator.this, "Please, fill all the fields.", Toast.LENGTH_LONG).show();
