@@ -82,6 +82,14 @@ public class MainMenu extends AppCompatActivity {
         Intent myIntent = new Intent(this, NewWorkoutCreator.class);
         startActivity(myIntent);
         finish();
+    }
+
+    public void deleteWorkout (View view){
+
+        //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
+        Intent myIntent = new Intent(this, DeleteWorkout.class);
+        startActivity(myIntent);
+        finish();
 
     }
 

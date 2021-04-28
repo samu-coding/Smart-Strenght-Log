@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProgressTracking.RoutineSelectionExportData">
+    tools:context=".DeleteWorkout">
+
+    <TextView
+        android:id="@+id/routine_selection_warning"
+        android:layout_width="304dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="@string/routine_selection_delete_warning"
+        android:textColor="#E14D4D"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/routine_selection_delete"
+        app:layout_constraintVertical_bias="0.685" />
 
     <TextView
 
@@ -22,16 +36,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/routine_selection"
-        android:layout_width="285dp"
-        android:layout_height="127dp"
+        android:id="@+id/routine_selection_delete"
+        android:layout_width="340dp"
+        android:layout_height="62dp"
+        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:text="@string/routine_selection_ExportData"
+        android:text="@string/routine_selection_delete"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.245" />
 
     <TextView
         android:id="@+id/list_no_workouts"

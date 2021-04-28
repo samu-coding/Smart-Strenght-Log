@@ -152,15 +152,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 }
                             });
 
-
-
-
-
-                    // Mandar a una nueva vista:
-                    //------------->>!!
-                    //startActivity(new Intent(CreateAccountActivity.this, MainMenu.class));
-                    //finish();
-
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("ERROR", "createUserWithEmail:failure", task.getException());
@@ -169,7 +160,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                     updateUI(null);
                 }
 
-                // ...
             }
         });
 

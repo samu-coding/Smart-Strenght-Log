@@ -120,9 +120,7 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
     //Boton para crear el workout
 
-
-
-
+    
 
     public void createWorkoutButton(View view){
 
@@ -138,34 +136,42 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
         String exercise0 = exerciseEditText0.getText().toString().trim();
         String descriptionExercise0 = notesExerciseEditText0.getText().toString().trim();
-        int numberOfSets0 = Integer.parseInt(numberOfSetsEditText0.getText().toString());
+        String numberOfSets0_str = numberOfSetsEditText0.getText().toString();
         String exercise1 = exerciseEditText1.getText().toString().trim();
         String descriptionExercise1 = notesExerciseEditText1.getText().toString().trim();
-        int numberOfSets1 = Integer.parseInt(numberOfSetsEditText1.getText().toString());
+        String numberOfSets1_str = numberOfSetsEditText1.getText().toString();
         String exercise2 = exerciseEditText2.getText().toString().trim();
         String descriptionExercise2 = notesExerciseEditText2.getText().toString().trim();
-        int numberOfSets2 = Integer.parseInt(numberOfSetsEditText2.getText().toString());
+        String numberOfSets2_str = numberOfSetsEditText2.getText().toString();
 
         //Creamos las Listas de Ejercicios y sus sets
         List<String> exercises = new ArrayList<String>();
         List<String> notesExercises = new ArrayList<String>();
         List<Integer> sets = new ArrayList<Integer>();
 
-        //Añadimos ejercicios y sets
-        exercises.add(exercise0);
-        exercises.add(exercise1);
-        exercises.add(exercise2);
-        notesExercises.add(descriptionExercise0);
-        notesExercises.add(descriptionExercise1);
-        notesExercises.add(descriptionExercise2);
-        sets.add(numberOfSets0);
-        sets.add(numberOfSets1);
-        sets.add(numberOfSets2);
 
 
-        if (!TextUtils.isEmpty(title)){
+
+        if (!title.isEmpty() && !description.isEmpty() && !exercise0.isEmpty() && !numberOfSets0_str.isEmpty() && !exercise1.isEmpty() && !numberOfSets1_str.isEmpty() && !exercise2.isEmpty() && !numberOfSets2_str.isEmpty()){
             //Guardamos la info del workout en FireStore
-            //.child("Workout" + Timestamp.now().getSeconds());)
+
+            //Añadimos ejercicios y sets
+            exercises.add(exercise0);
+            exercises.add(exercise1);
+            exercises.add(exercise2);
+            notesExercises.add(descriptionExercise0);
+            notesExercises.add(descriptionExercise1);
+            notesExercises.add(descriptionExercise2);
+
+            //Una vez sabemos que no está vacío el campo, lo convertimos a entero.
+            int numberOfSets0 = Integer.parseInt(numberOfSets0_str);
+            int numberOfSets1 = Integer.parseInt(numberOfSets1_str);
+            int numberOfSets2 = Integer.parseInt(numberOfSets2_str);
+
+            sets.add(numberOfSets0);
+            sets.add(numberOfSets1);
+            sets.add(numberOfSets2);
+
 
             //Create a Workout Object
             Workout workout = new Workout();
@@ -176,8 +182,6 @@ public class NewWorkoutCreator extends AppCompatActivity {
             workout.setExercises(exercises);
             workout.setSets(sets);
             workout.setNotes(notesExercises);
-
-
 
             //Invoke our CollectionReference
             collectionReference.add(workout)
@@ -203,9 +207,8 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
             //Save a Workout instance
 
-
         }else{
-            Toast.makeText(this, "A tittle is required!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fill al the information first.", Toast.LENGTH_SHORT).show();
         }
 
     }
