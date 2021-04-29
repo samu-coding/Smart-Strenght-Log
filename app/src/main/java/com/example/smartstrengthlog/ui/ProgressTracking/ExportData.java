@@ -143,10 +143,9 @@ public class ExportData extends AppCompatActivity {
                                         }
                                     } else {
                                         Log.d("SEARCH", "Error getting documents: ", task.getException());
+                                        Toast.makeText(getApplicationContext(), "No data available to send!", Toast.LENGTH_SHORT);
                                     }
                                 }
-
-
                             }
                         });
 

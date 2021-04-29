@@ -120,7 +120,7 @@ public class NewWorkoutCreator extends AppCompatActivity {
 
     //Boton para crear el workout
 
-    
+
 
     public void createWorkoutButton(View view){
 

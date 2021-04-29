@@ -10,21 +10,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStrengthLog">
-        <activity android:name=".DeleteWorkout"></activity>
-        <activity android:name=".ui.ProgressTracking.RoutineSelectionExportData" />
-        <activity android:name=".ui.ProgressTracking.ExportData" />
-        <activity android:name=".ui.ProgressTracking.RmCalculator" />
-        <activity android:name=".ui.ProgressTracking.PerformanceStats" />
-        <activity android:name=".ui.ProgressTracking.ExerciseSelectionProgress" />
-        <activity android:name=".ui.ProgressTracking.RoutineSelectionProgress" />
-        <activity android:name=".WorkoutSessionLog" />
-        <activity android:name=".NewWorkoutCreator" />
+        <activity android:name=".DeleteWorkout"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.ProgressTracking.RoutineSelectionExportData"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ProgressTracking.ExportData"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ProgressTracking.RmCalculator"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ProgressTracking.PerformanceStats"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ProgressTracking.ExerciseSelectionProgress"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ProgressTracking.RoutineSelectionProgress"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WorkoutSessionLog"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewWorkoutCreator"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainMenu"
-            android:label="@string/title_activity_main_menu" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".MainActivity">
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_main_menu"
+            />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CreateAccountActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -99,12 +99,7 @@ public class DeleteWorkout extends AppCompatActivity {
         Workout workout = workoutList.get(position);
         String workoutId = workout.getId();
 
-        //Cambio de vista
-        //Intent intent = new Intent(this, ExportData.class);
-        //intent.putExtra("workoutID", workout.getId());
-        //startActivity(intent);
-
-        //Dialogo
+         //Dialogo
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Confirm Delete:");
         alertDialog.setMessage("Are you sure you want to delete this workout routine and ALL it´s sessions information?");

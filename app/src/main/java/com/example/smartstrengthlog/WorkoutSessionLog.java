@@ -372,7 +372,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
 
-                        Toast.makeText(WorkoutSessionLog.this, "Saving Workout Session...", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(WorkoutSessionLog.this, "Saving Workout Session...", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(WorkoutSessionLog.this, MainMenu.class));
                         finish();
 
