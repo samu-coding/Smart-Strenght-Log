@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:label="@string/home_tittle"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    >
 
 
     <LinearLayout
@@ -56,14 +57,15 @@
             android:layout_width="376dp"
             android:layout_height="175dp"
             android:layout_gravity="center"
-            android:backgroundTint="#F3F0F0"
+            android:backgroundTint="#FFFF"
             app:cardCornerRadius="8dp"
             app:cardElevation="6dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toTopOf="@+id/button_logOut"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout">
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            >
 
             <LinearLayout
                 android:id="@+id/acct_login_form"
@@ -74,7 +76,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/button_logOut"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_home">
+                app:layout_constraintTop_toBottomOf="@+id/text_home"
+                >
 
                 <TextView
                     android:id="@+id/header_last_WK"

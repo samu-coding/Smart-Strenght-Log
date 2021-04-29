@@ -172,5 +172,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                MainActivity.class);
+        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+        startActivity(intent);
+    }
+
 
 }
