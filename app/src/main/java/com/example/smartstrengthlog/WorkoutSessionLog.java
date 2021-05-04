@@ -527,6 +527,7 @@ public class WorkoutSessionLog extends AppCompatActivity {
         SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
         intent.putExtra("username", smartStrengthLogAPI.getUsername());
         intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+        intent.putExtra("fragmentToLoad", "Workout");
         startActivity(intent);
     }
 

@@ -3,6 +3,7 @@ package com.example.smartstrengthlog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import com.google.firebase.storage.StorageReference;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -50,8 +53,6 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-       // Toast.makeText(MainMenu.this, "INICIADO!", Toast.LENGTH_SHORT).show();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -64,8 +65,25 @@ public class MainMenu extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        //noWorkoutEntry = findViewById(R.id.list_no_workouts);
-        //noWorkoutEntry.setVisibility(View.VISIBLE);
+        String fragmentRequired = getIntent().getExtras().getString("fragmentToLoad");
+
+
+        //Cambio al fragment deseado
+        if (fragmentRequired != null){
+
+            switch (fragmentRequired){
+
+                case "Performance":
+                    navController.navigate(R.id.navigation_performance);
+                    break;
+                case "Workout":
+                    navController.navigate(R.id.navigation_workout);
+                    break;
+
+            }
+
+
+        }
 
         workoutList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
@@ -78,7 +96,7 @@ public class MainMenu extends AppCompatActivity {
 
     }
 
-    //Al clickar al botón de nuevo WK, vamos a esta pantalla
+    //Al clicar el botón de nuevo WK, vamos a esta pantalla
     public void createWorkout (View view){
 
         //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
@@ -122,7 +140,7 @@ public class MainMenu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
     }
 
     public void aboutInfo(View view){
