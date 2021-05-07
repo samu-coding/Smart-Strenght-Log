@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartstrengthlog.ui.Events.EventCalendar;
 import com.example.smartstrengthlog.ui.ProgressTracking.RmCalculator;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionExportData;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionProgress;
@@ -135,8 +136,15 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent(this,
                 RoutineSelectionExportData.class);
         startActivity(intent);
-
     }
+
+    public void gotoEvents(View view){
+
+        Intent intent = new Intent(this,
+                EventCalendar.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onBackPressed() {

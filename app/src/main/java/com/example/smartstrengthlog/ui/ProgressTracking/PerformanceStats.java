@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -59,7 +60,6 @@ public class PerformanceStats extends AppCompatActivity {
 
     //Guardado de marcas
     List<Integer> marcas =new ArrayList<>();
-
     List<Date> diaWKSession =new ArrayList<>();
 
 
@@ -82,7 +82,7 @@ public class PerformanceStats extends AppCompatActivity {
         name_exercise = (String) getIntent().getSerializableExtra("exercise");
         documentID = (String) getIntent().getSerializableExtra("documentID");
 
-        name_exercise_Title.setText(name_exercise + " Performance:");
+        name_exercise_Title.setText(name_exercise+ "\nPerformance:");
 
         botonInfo = findViewById(R.id.button_more_info_stats);
         botonInfo.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +108,16 @@ public class PerformanceStats extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d("SEARCH", document.getId() + " => " + document.getData());
+
+
+                        Date dateaso = null;
+                        try {
+                            dateaso = new SimpleDateFormat("yyyy-MM-dd").parse(document.getId());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        diaWKSession.add(dateaso);
                         String auxID = document.getId();
 
                         //Subquery para los valores del primer set
@@ -130,20 +140,7 @@ public class PerformanceStats extends AppCompatActivity {
 
                                         int oneRM = (int) (weight * (1+(0.033 * reps)));
 
-                                        String diaString = document.get("Date").toString();
-
-                                        Date dateaso = null;
-                                        try {
-                                            dateaso = new SimpleDateFormat("YYYY-MM-dd").parse(diaString);
-                                            Log.d("Dateaso","EXITO " + dateaso);
-                                        } catch (ParseException e) {
-                                            e.printStackTrace();
-                                            Log.d("Dateaso","ERROR EN LA CONVERSION" + dateaso);
-                                        }
-
-
-                                        diaWKSession.add(dateaso);
-
+                                        //String diaString = document.get("Date").toString();
                                         //Date dia = dateFormat.parse(diaString);
 
                                         marcas.add(oneRM);
@@ -154,7 +151,6 @@ public class PerformanceStats extends AppCompatActivity {
                                     //Log.d("MARCAS", marcas.toString());
                                     marcasAPI.setMarcas(marcas);
                                     marcasAPI.setDates(diaWKSession);
-                                    Log.d("MARCAS API IN", marcasAPI.getMarcas().toString());
 
                                 }
 
@@ -197,14 +193,42 @@ public class PerformanceStats extends AppCompatActivity {
         GraphView graph = (GraphView) findViewById(R.id.graph);
         DataPoint [] dataPoints = new DataPoint[marcas.size()];
 
-        for (int i =0; i<marcas.size(); i++){
-            dataPoints [i] = new DataPoint((i),marcas.get(i));
-        }
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
-        series.setColor(Color.RED);
-        graph.addSeries(series);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
 
+        for (int i =0; i<marcas.size(); i++){
+
+            Log.d("dataPoint", "DIA: "+ diaWKSession.get(i) +" | Marca: "+marcas.get(i));
+            //dataPoints [i] = new DataPoint(diaWKSession.get(i),marcas.get(i));
+           dataPoints [i] = new DataPoint((i+1),marcas.get(i));
+        }
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+        /*graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter()
+        {
+            @Override
+            public String formatLabel(double value, boolean isValueX){
+
+                if(isValueX)
+                {
+                    return simpleDateFormat.format(new Date((long) value));
+                }else
+                {
+                    return super.formatLabel(value,isValueX);
+                }
+            }
+        });*/
+
+        graph.getGridLabelRenderer().setNumHorizontalLabels(marcas.size());
+        //graph.getGridLabelRenderer().setTextSize(30f);
+        //graph.getGridLabelRenderer().reloadStyles();
+
+        series.setColor(Color.BLUE);
+        series.setThickness(7);
+        graph.addSeries(series);
         num_wk_grafica.setText("Analysis of the last "+marcas.size()+" sessions.");
+        Log.d("Dias", String.valueOf(diaWKSession));
+        Log.d("Marcas", String.valueOf(marcas));
+        Log.d("Points", String.valueOf(dataPoints));
 
     }
 

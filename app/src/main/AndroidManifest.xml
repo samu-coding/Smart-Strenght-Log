@@ -10,34 +10,47 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStrengthLog">
-        <activity android:name=".DeleteWorkout"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.ProgressTracking.RoutineSelectionExportData"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ProgressTracking.ExportData"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ProgressTracking.RmCalculator"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ProgressTracking.PerformanceStats"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ProgressTracking.ExerciseSelectionProgress"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ProgressTracking.RoutineSelectionProgress"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".WorkoutSessionLog"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".NewWorkoutCreator"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.Events.EventCalendar"></activity>
+        <activity android:name=".ui.Events.mainListEvents" />
+        <activity
+            android:name=".DeleteWorkout"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ProgressTracking.RoutineSelectionExportData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ProgressTracking.ExportData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ProgressTracking.RmCalculator"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ProgressTracking.PerformanceStats"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ProgressTracking.ExerciseSelectionProgress"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ProgressTracking.RoutineSelectionProgress"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WorkoutSessionLog"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewWorkoutCreator"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainMenu"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_main_menu"
-            />
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CreateAccountActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

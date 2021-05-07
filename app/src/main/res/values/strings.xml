@@ -59,4 +59,9 @@
     <string name="routine_selection_delete">Select the Workout you want to delete:</string>
     <string name="routine_selection_delete_warning">Be aware that all the sessions registered from this workout routine will be deleted.</string>
     <string name="About">About SSL</string>
+    <string name="event_planner_text">All my events</string>
+    <string name="forward"><![CDATA[-->]]></string>
+    <string name="back"><![CDATA[<--]]></string>
+    <string name="titleEvent_hint">Name of the event</string>
+    <string name="title_event">New Event:</string>
 </resources>
