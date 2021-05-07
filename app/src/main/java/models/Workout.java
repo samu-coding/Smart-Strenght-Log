@@ -14,7 +14,7 @@ public class Workout {
     List<Integer> sets = new ArrayList<Integer>();
     List<String> notes = new ArrayList<String>();
 
-    public Workout() { //Necesario la Firestore
+    public Workout() { //Necesario paraa Firestore
     }
 
     public List<String> getNotes() { return notes; }

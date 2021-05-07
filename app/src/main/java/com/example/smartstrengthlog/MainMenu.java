@@ -3,12 +3,10 @@ package com.example.smartstrengthlog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.smartstrengthlog.ui.Events.EventCalendar;
+import com.example.smartstrengthlog.ui.Events.EventList;
 import com.example.smartstrengthlog.ui.ProgressTracking.RmCalculator;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionExportData;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionProgress;
@@ -21,8 +19,6 @@ import com.google.firebase.storage.StorageReference;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,7 +30,6 @@ import java.util.List;
 
 import models.Workout;
 import ui.WorkoutRecyclerAdapter;
-import util.SmartStrengthLogAPI;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -141,7 +136,7 @@ public class MainMenu extends AppCompatActivity {
     public void gotoEvents(View view){
 
         Intent intent = new Intent(this,
-                EventCalendar.class);
+                EventList.class);
         startActivity(intent);
     }
 
@@ -155,7 +150,7 @@ public class MainMenu extends AppCompatActivity {
         //Dialogo
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("About Smart Stregth Log");
-        alertDialog.setMessage("Smart Stegth Log v1.0\nLast update: 25/04/2021\n\n Developed by: Samuel Soria\n Contact: samuelsoria.pinar@gmail.com ");
+        alertDialog.setMessage("Smart Stegth Log v1.0\nLast update: 16/05/2021\n\n Developed by: Samuel Soria\n Contact: samuelsoria.pinar@gmail.com ");
         //alertDialog.setIcon(int )
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override

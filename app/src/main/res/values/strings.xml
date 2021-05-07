@@ -64,4 +64,8 @@
     <string name="back"><![CDATA[<--]]></string>
     <string name="titleEvent_hint">Name of the event</string>
     <string name="title_event">New Event:</string>
+    <string name="all_your_events">All your events:</string>
+    <string name="all_your_events_explain">This list shows all your upcoming events.</string>
+    <string name="event_selection_delete">Select the event you want to delete:</string>
+    <string name="event_selection_delete_warning">Be aware that the event will be permanently deleted.</string>
 </resources>

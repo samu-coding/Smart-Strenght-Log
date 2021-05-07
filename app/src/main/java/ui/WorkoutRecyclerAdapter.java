@@ -40,8 +40,8 @@ public class WorkoutRecyclerAdapter extends RecyclerView.Adapter<WorkoutRecycler
     @Override
     public void onBindViewHolder(@NonNull WorkoutRecyclerAdapter.ViewHolder holder, int position) {
 
-        Workout workout = workoutList.get(position);
 
+        Workout workout = workoutList.get(position);
         holder.title.setText(workout.getTitle());
         holder.workoutDescription.setText(workout.getDescription());
 

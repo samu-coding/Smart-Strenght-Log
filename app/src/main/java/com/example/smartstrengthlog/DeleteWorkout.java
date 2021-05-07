@@ -168,11 +168,6 @@ public class DeleteWorkout extends AppCompatActivity {
                         }
                     }
                 });
-        ;
-
-
-
-
     }
 
 

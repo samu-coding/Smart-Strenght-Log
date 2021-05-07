@@ -110,7 +110,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
             }
         });
 
-        //Clickamos en el tercer botón
+        //Clicaamos en el tercer botón
         name_exercise3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

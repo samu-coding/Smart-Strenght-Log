@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartStrengthLog">
-        <activity android:name=".ui.Events.EventCalendar"></activity>
+        <activity android:name=".ui.Events.EventList"></activity>
+        <activity android:name=".ui.Events.CreateEvent" />
         <activity android:name=".ui.Events.mainListEvents" />
         <activity
             android:name=".DeleteWorkout"
