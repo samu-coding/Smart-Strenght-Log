@@ -373,7 +373,16 @@ public class WorkoutSessionLog extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
 
                         //Toast.makeText(WorkoutSessionLog.this, "Saving Workout Session...", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(WorkoutSessionLog.this, MainMenu.class));
+                        //startActivity(new Intent(WorkoutSessionLog.this, MainMenu.class));
+
+
+                        Intent intent = new Intent(WorkoutSessionLog.this,
+                                MainMenu.class);
+                        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+                        intent.putExtra("username", smartStrengthLogAPI.getUsername());
+                        intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+                        intent.putExtra("fragmentToLoad", "Home");
+                        startActivity(intent);
                         finish();
 
                     }

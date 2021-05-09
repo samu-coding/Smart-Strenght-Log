@@ -189,7 +189,13 @@ public class NewWorkoutCreator extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
 
-                            startActivity(new Intent(NewWorkoutCreator.this, MainMenu.class));
+                            Intent intent = new Intent(NewWorkoutCreator.this,
+                                    MainMenu.class);
+                            SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+                            intent.putExtra("username", smartStrengthLogAPI.getUsername());
+                            intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+                            intent.putExtra("fragmentToLoad", "Workout");
+                            startActivity(intent);
                             finish();
                             Toast.makeText(NewWorkoutCreator.this, "Workout created!", Toast.LENGTH_LONG).show();
 

@@ -133,6 +133,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                                                 MainMenu.class);
                                                         intent.putExtra("username", email);
                                                         intent.putExtra("userId", userId);
+                                                        intent.putExtra("fragmentToLoad", "Home");
                                                         startActivity(intent);
                                                         finish();
 

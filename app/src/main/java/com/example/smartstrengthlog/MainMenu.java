@@ -3,6 +3,7 @@ package com.example.smartstrengthlog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -62,12 +63,16 @@ public class MainMenu extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         String fragmentRequired = getIntent().getExtras().getString("fragmentToLoad");
-
+        Log.d("MAINMENU",fragmentRequired);
 
         //Cambio al fragment deseado
         if (fragmentRequired != null){
 
             switch (fragmentRequired){
+
+                case "Home":
+                    navController.navigate(R.id.navigation_home);
+                    break;
 
                 case "Performance":
                     navController.navigate(R.id.navigation_performance);
@@ -75,9 +80,7 @@ public class MainMenu extends AppCompatActivity {
                 case "Workout":
                     navController.navigate(R.id.navigation_workout);
                     break;
-
             }
-
 
         }
 

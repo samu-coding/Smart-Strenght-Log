@@ -118,7 +118,9 @@ public class LoginActivity extends AppCompatActivity {
                                     MainMenu.class);
                             intent.putExtra("username", email);
                             intent.putExtra("userId", currentUserId);
+                            intent.putExtra("fragmentToLoad", "Home");
                             startActivity(intent);
+
 
                             Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
 

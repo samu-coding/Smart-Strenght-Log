@@ -15,8 +15,5 @@
     <color name="lista_color">#F1F1F1</color>
     <color name="startColor">#B8B1C5</color>
     <color name="gray">#888</color>
-
-
-
-    color name ="green_dark"
+    <color name="floatingboton_color">#754AB5</color>
 </resources>

@@ -16,13 +16,12 @@ import android.widget.Toast;
 import com.example.smartstrengthlog.MainMenu;
 import com.example.smartstrengthlog.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import models.Event;
 import util.SmartStrengthLogAPI;
 
 public class CreateEvent extends AppCompatActivity {
@@ -71,11 +70,7 @@ public class CreateEvent extends AppCompatActivity {
                        saveEvent(nameEventString, date);
 
                        Intent intent = new Intent(CreateEvent.this,
-                               MainMenu.class);
-                       SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
-                       intent.putExtra("username", smartStrengthLogAPI.getUsername());
-                       intent.putExtra("userId", smartStrengthLogAPI.getUserId());
-                       intent.putExtra("fragmentToLoad", "Performance");
+                               EventList.class);
                        startActivity(intent);
                    }
                    else{
@@ -96,10 +91,17 @@ public class CreateEvent extends AppCompatActivity {
 
         String currentUserId = SmartStrengthLogAPI.getInstance().getUserId();
 
-        Map<String, Object> evento = new HashMap<>();
+       /* Map<String, Object> evento = new HashMap<>();
         evento.put("nameEvent", nameEvent);
         evento.put("dateEvent", date);
         evento.put("user", currentUserId);
+        evento.put("eventID", String.valueOf(Timestamp.now().getSeconds()));*/
+
+        Event evento = new Event();
+        evento.setNameEvent(nameEvent);
+        evento.setDateEvent(date);
+        evento.setUser(currentUserId);
+        evento.setEventID(String.valueOf(Timestamp.now().getSeconds()));
 
         collectionReference.add(evento)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -115,11 +117,7 @@ public class CreateEvent extends AppCompatActivity {
     public void onBackPressed() {
         //Cambio de vista
         Intent intent = new Intent(this,
-                MainMenu.class);
-        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
-        intent.putExtra("username", smartStrengthLogAPI.getUsername());
-        intent.putExtra("userId", smartStrengthLogAPI.getUserId());
-        intent.putExtra("fragmentToLoad", "Performance");
+                EventList.class);
         startActivity(intent);
     }
 }
