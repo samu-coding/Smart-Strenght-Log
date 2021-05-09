@@ -118,7 +118,9 @@ public class LoginActivity extends AppCompatActivity {
                                     MainMenu.class);
                             intent.putExtra("username", email);
                             intent.putExtra("userId", currentUserId);
+                            intent.putExtra("fragmentToLoad", "Home");
                             startActivity(intent);
+
 
                             Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
 
@@ -170,6 +172,15 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, CreateAccountActivity.class));
         finish();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //Cambio de vista
+        Intent intent = new Intent(this,
+                MainActivity.class);
+        SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
+        startActivity(intent);
     }
 
 

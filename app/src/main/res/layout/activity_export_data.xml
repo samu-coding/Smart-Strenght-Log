@@ -4,50 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProgressTracking.ExportData">
+    tools:context=".ui.ProgressTracking.ExportData"
+    android:background="@drawable/gradient_bg_in">
 
 
     <TextView
         android:id="@+id/Export_Data_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="360dp"
+        android:layout_height="78dp"
         android:fontFamily="@font/roboto_slab_bold"
         android:gravity="center"
         android:text="@string/ExportdataTitle"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.092" />
+        app:layout_constraintVertical_bias="0.091" />
 
     <TextView
         android:id="@+id/ExportData_guia"
         android:layout_width="250dp"
         android:layout_height="57dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:text="@string/texto_ExportData_guia"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_calculate_rm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Export_Data_title"
         app:layout_constraintVertical_bias="0.333" />
 
     <TextView
         android:id="@+id/ExportData_guia_2"
-        android:layout_width="250dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="247dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
         android:text="@string/texto_ExportData_guia_2"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_calculate_rm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ExportData_guia"
         app:layout_constraintVertical_bias="0.222" />
@@ -56,13 +57,13 @@
         android:id="@+id/button_save_info"
         android:layout_width="274dp"
         android:layout_height="46dp"
+        android:onClick="buttonExport"
         android:text="Export Data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        android:onClick="buttonExport"
         app:layout_constraintVertical_bias="0.335" />
 
     <ImageView
@@ -75,7 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ExportData_guia_2"
         app:layout_constraintVertical_bias="0.168"
-        app:srcCompat="@drawable/csv_img" />
+        app:srcCompat="@drawable/csv_img2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

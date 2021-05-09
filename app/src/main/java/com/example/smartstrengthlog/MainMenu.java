@@ -1,10 +1,13 @@
 package com.example.smartstrengthlog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.smartstrengthlog.ui.Events.EventList;
 import com.example.smartstrengthlog.ui.ProgressTracking.RmCalculator;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionExportData;
 import com.example.smartstrengthlog.ui.ProgressTracking.RoutineSelectionProgress;
@@ -15,6 +18,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -47,8 +51,6 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-       // Toast.makeText(MainMenu.this, "INICIADO!", Toast.LENGTH_SHORT).show();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -61,8 +63,27 @@ public class MainMenu extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        //noWorkoutEntry = findViewById(R.id.list_no_workouts);
-        //noWorkoutEntry.setVisibility(View.VISIBLE);
+        String fragmentRequired = getIntent().getExtras().getString("fragmentToLoad");
+        Log.d("MAINMENU",fragmentRequired);
+
+        //Cambio al fragment deseado
+        if (fragmentRequired != null){
+
+            switch (fragmentRequired){
+
+                case "Home":
+                    navController.navigate(R.id.navigation_home);
+                    break;
+
+                case "Performance":
+                    navController.navigate(R.id.navigation_performance);
+                    break;
+                case "Workout":
+                    navController.navigate(R.id.navigation_workout);
+                    break;
+            }
+
+        }
 
         workoutList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
@@ -75,11 +96,19 @@ public class MainMenu extends AppCompatActivity {
 
     }
 
-    //Al clickar al botón de nuevo WK, vamos a esta pantalla
+    //Al clicar el botón de nuevo WK, vamos a esta pantalla
     public void createWorkout (View view){
 
         //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
         Intent myIntent = new Intent(this, NewWorkoutCreator.class);
+        startActivity(myIntent);
+        finish();
+    }
+
+    public void deleteWorkout (View view){
+
+        //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
+        Intent myIntent = new Intent(this, DeleteWorkout.class);
         startActivity(myIntent);
         finish();
 
@@ -106,12 +135,38 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent(this,
                 RoutineSelectionExportData.class);
         startActivity(intent);
+    }
 
+    public void gotoEvents(View view){
+
+        Intent intent = new Intent(this,
+                EventList.class);
+        startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    public void aboutInfo(View view){
+        //Dialogo
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("About Smart Stregth Log");
+        alertDialog.setMessage("Smart Stegth Log v1.0\nLast update: 16/05/2021\n\n Developed by: Samuel Soria\n Contact: samuelsoria.pinar@gmail.com ");
+        //alertDialog.setIcon(int )
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 
 

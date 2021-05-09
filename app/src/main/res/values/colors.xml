@@ -7,6 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    color name ="green_dark"
+    <color name="midColor_in">#D6CEE4</color>
+    <color name="endColor_in">#FFFFFF</color>
+    <color name="midColor">#9973A0</color>
+    <color name="endColor">#FFFF</color>
+    <color name="startColor_in">#695985</color>
+    <color name="lista_color">#F1F1F1</color>
+    <color name="startColor">#B8B1C5</color>
+    <color name="gray">#888</color>
+    <color name="floatingboton_color">#754AB5</color>
 </resources>

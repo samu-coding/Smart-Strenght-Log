@@ -53,8 +53,8 @@ public class ExportData extends AppCompatActivity {
         StringBuilder data = new StringBuilder();
         data.append(" ,Set,Repetitions,Weight,Reps In Reserve"); //Title
 
-        Log.d("boton","CLICK, wid:"+workoutId);
 
+        //Obtención del documento
         db.collection("Workout")
                 .whereEqualTo("id", workoutId)
                 .get()
@@ -143,10 +143,9 @@ public class ExportData extends AppCompatActivity {
                                         }
                                     } else {
                                         Log.d("SEARCH", "Error getting documents: ", task.getException());
+                                        Toast.makeText(getApplicationContext(), "No data available to send!", Toast.LENGTH_SHORT);
                                     }
                                 }
-
-
                             }
                         });
 
@@ -196,6 +195,7 @@ public class ExportData extends AppCompatActivity {
         SmartStrengthLogAPI smartStrengthLogAPI = new SmartStrengthLogAPI();
         intent.putExtra("username", smartStrengthLogAPI.getUsername());
         intent.putExtra("userId", smartStrengthLogAPI.getUserId());
+        intent.putExtra("fragmentToLoad", "Performance");
         startActivity(intent);
     }
 }
