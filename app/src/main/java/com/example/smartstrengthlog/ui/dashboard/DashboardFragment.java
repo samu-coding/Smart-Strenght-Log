@@ -44,12 +44,8 @@ import util.WorkoutSessionAPI;
 
 public class DashboardFragment extends Fragment implements WorkoutRecyclerAdapter.OnWorkoutClickListener {
 
-    private HomeViewModel homeViewModel;
-    private FirebaseAuth firebaseAuth;
-    private  FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private StorageReference storageReference;
     private List<Workout> workoutList;
     private RecyclerView recyclerView;
     private WorkoutRecyclerAdapter workoutRecyclerAdapter;
@@ -77,7 +73,6 @@ public class DashboardFragment extends Fragment implements WorkoutRecyclerAdapte
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //Para poder obtener el contexto del Fragment, usamos get Activity.
         Context HomeFragmentContext = getActivity();
         mostrarWorkouts(HomeFragmentContext);
 
@@ -89,81 +84,59 @@ public class DashboardFragment extends Fragment implements WorkoutRecyclerAdapte
         });
         return root;
     }
-    //Here is recommended to query the storage reference
+
     @Override
     public void onStart() {
         super.onStart();
 
         userId = SmartStrengthLogAPI.getInstance().getUserId();
-        //SmartStrengthLogAPI.getInstance().getUsername()
 
-        Log.d("USUARIO", "BUSQUEDA DOCUMENTO DE USUARIO :" +userId);
-
-        //Para poder obtener el contexto del Fragment, usamos get Activity.
-        Context HomeFragmentContext = getActivity();
+        Context HomeFragmentContext = getActivity();//Para poder obtener el contexto del Fragment
         mostrarWorkouts(HomeFragmentContext);
-
-
     }
 
     public void mostrarWorkouts(Context HomeFragmentContext){
         collectionReference.whereEqualTo("user", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
 
                     for (QueryDocumentSnapshot document :task.getResult()){
-
                         Workout workout = document.toObject(Workout.class);
                         workoutList.add(workout);
-                        Log.d("DOCU", document.getId() + "-->" + document.getData());
-
                     }
 
-                    //Invoke Recycler view
-
+                    //Recycler view
                     workoutRecyclerAdapter = new WorkoutRecyclerAdapter(HomeFragmentContext,
                             workoutList,DashboardFragment.this);
                     recyclerView.setAdapter(workoutRecyclerAdapter);
                     workoutRecyclerAdapter.notifyDataSetChanged();
-                    /*
-                    for(QueryDocumentSnapshot document :task.getResult()){
-                        Log.d("DOCU", document.getId() + "-->" + document.getData());
-                    }*/
+
                     if (workoutList.isEmpty()){
-
-                        //noWorkoutEntry.setVisibility(View.VISIBLE);
-                        //Toast.makeText(HomeFragmentContext, "NO ENCUENTRA WK", Toast.LENGTH_SHORT).show();
                         Log.d("DOCU","ERROR GETTING DOCUMENTS");
-
                     }
 
 
                 }else {
                     noWorkoutEntry.setVisibility(View.VISIBLE);
-                    Toast.makeText(HomeFragmentContext, "NO ENCUENTRA WK", Toast.LENGTH_SHORT).show();
                     Log.d("DOCU","ERROR GETTING DOCUMENTS");
                 }
             }
         });
     }
 
+    //Click de un workout
     @Override
     public void onWorkoutClick(int position) {
-        //Log.d("Clicked", "onWorkoutClick: " + position);
+
         WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
         workoutSessionAPI.setExerciseNumber(0);
-
         Workout workout = workoutList.get(position);
-        Log.d("Clicked", "Workout number: "+position +" Named:"+ workout.getTitle());
 
         //Cambio de vista
         Intent intent = new Intent(getActivity(),
                 WorkoutSessionLog.class);
         intent.putExtra("workoutId", workout.getId());
-        Log.d("Clicked", "QUEREMOS PASAR el id:  "+ workout.getId());
-
         startActivity(intent);
 
     }

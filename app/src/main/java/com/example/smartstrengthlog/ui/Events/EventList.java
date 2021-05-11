@@ -43,12 +43,7 @@ import util.SmartStrengthLogAPI;
 
 public class EventList extends AppCompatActivity implements EventRecyclerAdapter.OnEventClickListener {
 
-    private HomeViewModel homeViewModel;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private StorageReference storageReference;
     private List<Event> allEventsList;
     private RecyclerView recyclerView;
     private EventRecyclerAdapter eventRecyclerAdapter;
@@ -75,9 +70,7 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Para poder obtener el contexto del Fragment, usamos get Activity.
         mostrarEventos(this);
-
 
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -91,8 +84,6 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
         super.onStart();
 
         userId = SmartStrengthLogAPI.getInstance().getUserId();
-        Log.d("USUARIO", "BUSQUEDA DOCUMENTO DE USUARIO :" + userId);
-
         mostrarEventos(this);
 
 
@@ -100,7 +91,6 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
     
     public void mostrarEventos(Context HomeFragmentContext) {
         collectionReference.whereEqualTo("user", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -109,11 +99,9 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
 
                         Event event = document.toObject(Event.class);
                         allEventsList.add(event);
-                        Log.d("DOCU", document.getId() + "-->" + document.getData());
-
                     }
 
-                    //Invoke Recycler view
+                    //Recycler view
                     eventRecyclerAdapter = new EventRecyclerAdapter(HomeFragmentContext,
                             allEventsList, EventList.this);
                     recyclerView.setAdapter(eventRecyclerAdapter);
@@ -121,7 +109,6 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
 
                     if (allEventsList.isEmpty()){
 
-                        //Toast.makeText(HomeFragmentContext, "NO ENCUENTRA WK", Toast.LENGTH_SHORT).show();
                         Log.d("DOCU","ERROR GETTING DOCUMENTS");
 
                     }
@@ -146,17 +133,14 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
 
     @Override
     public void onEventClick(int position) {
-        //DELETE THE EVENT -> MARK AS DONE
-        //Log.d("Clicked", "onWorkoutClick: " + position);
 
         Event event = allEventsList.get(position);
         String eventId = event.getEventID();
 
-        //Dialogo
+        //Dialogo para avisa del borrado del evento
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Mark as done:");
         alertDialog.setMessage("Are you sure you want to mark this event as done? This action will DELETE the event.");
-        //alertDialog.setIcon(int )
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -167,7 +151,6 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
 
             private void deleteEvent(String eventId) {
 
-                //Toast.makeText(getApplicationContext(),"Deleting event: "+eventId, Toast.LENGTH_SHORT).show();
                 db.collection("Events")
                         .whereEqualTo("eventID", eventId)
                         .get()
@@ -191,9 +174,6 @@ public class EventList extends AppCompatActivity implements EventRecyclerAdapter
                                                         Intent intent = new Intent(EventList.this,
                                                                 EventList.class);
                                                         startActivity(intent);
-                                                        //onBackPressed();
-
-
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {

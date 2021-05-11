@@ -10,7 +10,6 @@ public class NotificationsViewModel extends ViewModel {
 
     public NotificationsViewModel() {
         mText = new MutableLiveData<>();
-
     }
 
     public LiveData<String> getText() {

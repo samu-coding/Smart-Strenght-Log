@@ -64,12 +64,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 currentUser = firebaseAuth.getCurrentUser();
 
-                if (currentUser!= null){
-                    //User already logged in
-                }else{
-                    //No user yet...
-                }
-
             }
         };
 
@@ -77,8 +71,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
+        // Comprobar si el usuario signed in (non-null) y actualizar UI.
         currentUser = firebaseAuth.getCurrentUser();
         updateUI(currentUser);
         firebaseAuth.addAuthStateListener(authStateListener);
@@ -120,12 +113,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                                                         String name = task.getResult()
                                                                 .getString("username");
 
-
-
                                                         SmartStrengthLogAPI smartStrengthLogAPI = SmartStrengthLogAPI.getInstance(); //Global API
                                                         smartStrengthLogAPI.setUserId(userId);
                                                         smartStrengthLogAPI.setUsername(email);
-
 
                                                         //Cambio de vista
                                                         Toast.makeText(CreateAccountActivity.this, "Welcome to Smart Strength Log!", Toast.LENGTH_SHORT).show();
@@ -154,7 +144,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                             });
 
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w("ERROR", "createUserWithEmail:failure", task.getException());
                     Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
@@ -174,12 +163,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String rePassword = rePasswordEditText.getText().toString();
-
-        //currentUser = mAuth.getCurrentUser();
-        //assert currentUser != null;
-        //String currentUserId = currentUser.getUid();
-
-
 
         Log.i("User:",""+email);
         Log.i("User:",""+password);

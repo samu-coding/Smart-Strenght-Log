@@ -32,10 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passwordEditText;
 
-    //
     private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser currentUser;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Users");
@@ -48,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email_login);
         passwordEditText = findViewById(R.id.password_email_login);
 
-
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -56,10 +52,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         updateUI(currentUser);
-        //firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     private void updateUI(FirebaseUser currentUser) {
@@ -74,12 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            // Sign in success, update UI with the signed-in user's information
-
+                            // Sign in con éxito
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             updateUI(user);
 
-                            //Firestore creation
                             assert user != null;
                             String currentUserId = user.getUid(); //Obtenemos el Id del usuario
 
@@ -98,20 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                                                 for (QueryDocumentSnapshot snapshot : value){
                                                     SmartStrengthLogAPI smartStrengthLogAPI = SmartStrengthLogAPI.getInstance();
                                                     smartStrengthLogAPI.setUsername(snapshot.getString("username"));
-                                                    //smartStrengthLogAPI.setUserId(snapshot.getString("userId"));
                                                     smartStrengthLogAPI.setUserId(currentUserId);
-                                                    //Log.d("USUARIO", "usuario:" +currentUserId);
                                                 }
                                             }
                                         }
 
                                     });
-
-                            //Vamos a la vista principal
-                            //-------------------------->
-                            //Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
-
-
 
                             //Cambio de vista
                             Intent intent = new Intent(LoginActivity.this,
@@ -121,11 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("fragmentToLoad", "Home");
                             startActivity(intent);
 
-
                             Toast.makeText(LoginActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
-
-                            //startActivity(new Intent(LoginActivity.this, MainMenu.class));
-                            //startActivity(new Intent(LoginActivity.this, DashboardFragment.class));
 
                             finish();
 
@@ -136,10 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Incorrect credentials, try again.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
-                            // ...
                         }
 
-                        // ...
                     }
                 });
 
@@ -158,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                 signWithEmailAndPassword(email, pass);
 
             }else {
-                Toast.makeText(this, "Password should be at least 6 characters long", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Password should be at least 6 characters long.", Toast.LENGTH_LONG).show();
             }
 
         }else{

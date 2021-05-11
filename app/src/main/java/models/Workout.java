@@ -14,16 +14,13 @@ public class Workout {
     List<Integer> sets = new ArrayList<Integer>();
     List<String> notes = new ArrayList<String>();
 
-    public Workout() { //Necesario paraa Firestore
+    public Workout() { //Necesario para Firestore
     }
 
     public List<String> getNotes() { return notes; }
 
     public void setNotes(List<String> notes) { this.notes = notes; }
 
-    public List<String> getNotes() { return notes; }
-
-    public void setNotes(List<String> notes) { this.notes = notes; }
 
     public String getId() {
         return id;

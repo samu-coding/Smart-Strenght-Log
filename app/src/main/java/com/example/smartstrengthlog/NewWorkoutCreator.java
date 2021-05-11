@@ -43,8 +43,6 @@ public class NewWorkoutCreator extends AppCompatActivity {
     private EditText numberOfSetsEditText2;
     private EditText notesExerciseEditText2;
 
-    private TextView currentUserTextView;
-
     private String currentUserId;
     private String currentUsername;
 
@@ -55,7 +53,6 @@ public class NewWorkoutCreator extends AppCompatActivity {
     //Connection to Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Workout");
-    //private CollectionReference collectionReference = db.collection("Users").document(this.currentUsername).collection("Workout");
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -149,9 +146,6 @@ public class NewWorkoutCreator extends AppCompatActivity {
         List<String> notesExercises = new ArrayList<String>();
         List<Integer> sets = new ArrayList<Integer>();
 
-
-
-
         if (!title.isEmpty() && !description.isEmpty() && !exercise0.isEmpty() && !numberOfSets0_str.isEmpty() && !exercise1.isEmpty() && !numberOfSets1_str.isEmpty() && !exercise2.isEmpty() && !numberOfSets2_str.isEmpty()){
             //Guardamos la info del workout en FireStore
 
@@ -210,8 +204,6 @@ public class NewWorkoutCreator extends AppCompatActivity {
                         }
                     });
 
-
-            //Save a Workout instance
 
         }else{
             Toast.makeText(this, "Fill al the information first.", Toast.LENGTH_SHORT).show();

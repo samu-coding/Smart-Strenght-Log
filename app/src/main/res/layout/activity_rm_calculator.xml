@@ -41,7 +41,7 @@
         android:layout_width="292dp"
         android:layout_height="15dp"
         android:maxLines="1"
-        android:text="Complete the information to calculate your 1 RM:"
+        android:text="@string/complete_info_1rm"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
@@ -67,7 +67,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:autofillHints=""
             android:hint="@string/number_reps"
             android:inputType="number"
@@ -78,10 +78,11 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:hint="@string/weight"
             android:inputType="numberDecimal"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:importantForAutofill="no" />
 
 
 
@@ -117,7 +118,7 @@
         android:id="@+id/button_calculate_rm"
         android:layout_width="274dp"
         android:layout_height="46dp"
-        android:text="Calculate"
+        android:text="@string/calculate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
