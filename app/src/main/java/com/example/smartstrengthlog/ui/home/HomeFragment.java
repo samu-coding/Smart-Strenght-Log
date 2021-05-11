@@ -55,17 +55,8 @@ import static java.lang.Integer.parseInt;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private FirebaseAuth firebaseAuth;
-    private  FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private StorageReference storageReference;
-    private List<Workout> workoutList;
-    private RecyclerView recyclerView;
-    private WorkoutRecyclerAdapter workoutRecyclerAdapter;
-
     private CollectionReference collectionReference = db.collection("Workout");
-    private TextView noWorkoutEntry;
 
     private TextView emailUser;
     private String userId;
@@ -89,12 +80,10 @@ public class HomeFragment extends Fragment {
         lastWK1 = root.findViewById(R.id.last_1_WK);
         lastWK2 = root.findViewById(R.id.last_2_WK);
         lastWK3 = root.findViewById(R.id.last_3_WK);
-        //consultaLastWK (getContext());
-        userId = SmartStrengthLogAPI.getInstance().getUserId();
-        //SmartStrengthLogAPI.getInstance().getUsername()
-        //Log.d("USUARIOonCreate", "" +userId);
-        consultaLastWK();
 
+        userId = SmartStrengthLogAPI.getInstance().getUserId();
+
+        consultaLastWK();
 
         emailUser = root.findViewById(R.id.textView_email);
         Log.d("EMAILonCreate", "" +userId);
@@ -104,33 +93,24 @@ public class HomeFragment extends Fragment {
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                //textView.setText(s);
             }
         });
         return root;
-
     }
 
-     //Here is recommended to query the storage reference
     @Override
     public void onStart() {
         super.onStart();
 
         userId = SmartStrengthLogAPI.getInstance().getUserId();
-        //SmartStrengthLogAPI.getInstance().getUsername()
-        Log.d("USUARIOonStart", "BUSQUEDA DOCUMENTO DE USUARIO :" +userId);
-
-        //Para poder obtener el contexto del Fragment, usamos get Activity.
         Context HomeFragmentContext = getActivity();
-
-
     }
 
     public void consultaLastWK(){
 
         userId = SmartStrengthLogAPI.getInstance().getUserId();
         Log.d("USERIDconsulta","ID:"+userId);
-        //.whereEqualTo("user", userId)
+
         Query query = db.collection("Workout")
                 .whereEqualTo("user", userId)
                 .orderBy("LastWorkout", Query.Direction.DESCENDING)
@@ -162,9 +142,6 @@ public class HomeFragment extends Fragment {
                             lastWK3.setText(wkTitles.get(2) + " - "+ wkDates.get(2));
                         }
                     }
-                   // lastWK2.setText(wkTitles.get(1) + " - "+ wkDates.get(1));
-                    //lastWK3.setText(wkTitles.get(2) + " - "+ wkDates.get(2));
-
 
                 }
 
@@ -174,11 +151,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-
-
     }
-
-
 
 }

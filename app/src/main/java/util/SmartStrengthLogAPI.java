@@ -4,8 +4,7 @@ import android.app.Application;
 
 public class SmartStrengthLogAPI extends Application {
 
-    //We will make it a singleton
-    private static SmartStrengthLogAPI instance; //Instance for the singleton
+    private static SmartStrengthLogAPI instance; //Instancia para el singleton
 
     private String username;
     private String userId;

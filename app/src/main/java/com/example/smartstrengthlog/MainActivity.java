@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         getStartedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Go to Log in Activity
+
                 startActivity(new Intent(MainActivity.this, CreateAccountActivity.class));
 
             }

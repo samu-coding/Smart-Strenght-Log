@@ -42,12 +42,7 @@ import util.WorkoutSessionAPI;
 
 public class RoutineSelectionProgress extends AppCompatActivity implements WorkoutRecyclerAdapter.OnWorkoutClickListener{
 
-    private HomeViewModel homeViewModel;
-    private FirebaseAuth firebaseAuth;
-    private  FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private StorageReference storageReference;
     private List<Workout> workoutList;
     private RecyclerView recyclerView;
     private WorkoutRecyclerAdapter workoutRecyclerAdapter;
@@ -67,8 +62,6 @@ public class RoutineSelectionProgress extends AppCompatActivity implements Worko
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
         final TextView textView = findViewById(R.id.text_dashboard);
-
-        //noWorkoutEntry = findViewById(R.id.list_no_workouts);
 
         workoutList = new ArrayList<>();
 
@@ -101,10 +94,8 @@ public class RoutineSelectionProgress extends AppCompatActivity implements Worko
 
     @Override
     public void onWorkoutClick(int position) {
-        //Log.d("Clicked", "onWorkoutClick: " + position);
         WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
         workoutSessionAPI.setExerciseNumber(0);
-
         Workout workout = workoutList.get(position);
 
         //Cambio de vista
@@ -120,7 +111,6 @@ public class RoutineSelectionProgress extends AppCompatActivity implements Worko
 
     public void mostrarWorkouts(Context HomeFragmentContext){
         collectionReference.whereEqualTo("user", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -141,7 +131,6 @@ public class RoutineSelectionProgress extends AppCompatActivity implements Worko
 
                     if (workoutList.isEmpty()){
 
-                        //Toast.makeText(HomeFragmentContext, "NO ENCUENTRA WK", Toast.LENGTH_SHORT).show();
                         Log.d("DOCU","ERROR GETTING DOCUMENTS");
 
                     }

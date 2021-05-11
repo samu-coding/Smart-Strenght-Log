@@ -27,8 +27,6 @@ public class InfoStatsDialog extends AppCompatDialogFragment {
                     }
                 });
 
-
-
         return  builder.create();
     }
 }

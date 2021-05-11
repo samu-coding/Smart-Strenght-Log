@@ -27,8 +27,6 @@ public class InfoWKSessionRIR extends AppCompatDialogFragment {
                     }
                 });
 
-
-
         return  builder.create();
     }
 }

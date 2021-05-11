@@ -9,10 +9,7 @@ import java.util.Map;
 
 public class WorkoutSessionAPI extends Application {
 
-
-    //We will make it a singleton
-    private static WorkoutSessionAPI instance; //Instance for the singleton
-
+    private static WorkoutSessionAPI instance; //Instancia para el singleton
 
     private Map<String, Object> set1_E1 = new HashMap<>();
     private Map<String, Object> set2_E1 = new HashMap<>();
@@ -36,7 +33,6 @@ public class WorkoutSessionAPI extends Application {
     }
 
     //Getter and setter
-
     public Map<String, Object> getSet1_E1() {
         return set1_E1;
     }

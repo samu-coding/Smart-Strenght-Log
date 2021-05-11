@@ -34,9 +34,6 @@ import ui.WorkoutRecyclerAdapter;
 
 public class MainMenu extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth;
-    private  FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private StorageReference storageReference;
     private List<Workout> workoutList;
@@ -45,7 +42,6 @@ public class MainMenu extends AppCompatActivity {
 
     private CollectionReference collectionReference = db.collection("Workout");
     private TextView noWorkoutEntry;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +94,7 @@ public class MainMenu extends AppCompatActivity {
     //Al clicar el botón de nuevo WK, vamos a esta pantalla
     public void createWorkout (View view){
 
-        //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
+        //Al ser un fragment, tenemos que referenciar el contexto
         Intent myIntent = new Intent(this, NewWorkoutCreator.class);
         startActivity(myIntent);
         finish();
@@ -106,7 +102,7 @@ public class MainMenu extends AppCompatActivity {
 
     public void deleteWorkout (View view){
 
-        //Al ser un fragment, tenemos que referenciar el contexto, por eso es diferente.
+        //Al ser un fragment, tenemos que referenciar el contexto
         Intent myIntent = new Intent(this, DeleteWorkout.class);
         startActivity(myIntent);
         finish();
@@ -144,17 +140,12 @@ public class MainMenu extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-
-    }
 
     public void aboutInfo(View view){
         //Dialogo
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("About Smart Stregth Log");
         alertDialog.setMessage("Smart Stegth Log v1.0\nLast update: 16/05/2021\n\n Developed by: Samuel Soria\n Contact: samuelsoria.pinar@gmail.com ");
-        //alertDialog.setIcon(int )
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -66,8 +66,6 @@ public class PerformanceStats extends AppCompatActivity {
     //test
     private int i =0;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +79,7 @@ public class PerformanceStats extends AppCompatActivity {
         workoutId = (String) getIntent().getSerializableExtra("workoutId");
         name_exercise = (String) getIntent().getSerializableExtra("exercise");
         documentID = (String) getIntent().getSerializableExtra("documentID");
+        ejercicio = getIntent().getExtras().getString("num_ejercicio");
 
         name_exercise_Title.setText(name_exercise+ "\nPerformance:");
 
@@ -137,15 +136,8 @@ public class PerformanceStats extends AppCompatActivity {
                                         //Fórmula de Epley Welday
                                         int reps = parseInt(document.get("Reps").toString());
                                         int weight = parseInt(document.get("Weight").toString());
-
-                                        int oneRM = (int) (weight * (1+(0.033 * reps)));
-
-                                        //String diaString = document.get("Date").toString();
-                                        //Date dia = dateFormat.parse(diaString);
-
+                                        int oneRM = (int) (weight * (1+(0.033 * reps))); //Epley & Welday Formula
                                         marcas.add(oneRM);
-
-
 
                                     }
                                     //Log.d("MARCAS", marcas.toString());
@@ -161,17 +153,10 @@ public class PerformanceStats extends AppCompatActivity {
                         });
 
                     }
-                    Log.d("MARCAS API OUT", marcasAPI.getMarcas().toString());
-
 
                 } else {
                     Log.d("MARCAS", "Error getting documents de MARCAS: ", task.getException());
                 }
-
-
-                //crearGraph(marcas);
-
-
             }
 
         });
@@ -193,34 +178,13 @@ public class PerformanceStats extends AppCompatActivity {
         GraphView graph = (GraphView) findViewById(R.id.graph);
         DataPoint [] dataPoints = new DataPoint[marcas.size()];
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
-
         for (int i =0; i<marcas.size(); i++){
-
-            Log.d("dataPoint", "DIA: "+ diaWKSession.get(i) +" | Marca: "+marcas.get(i));
-            //dataPoints [i] = new DataPoint(diaWKSession.get(i),marcas.get(i));
            dataPoints [i] = new DataPoint((i+1),marcas.get(i));
         }
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
-        /*graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter()
-        {
-            @Override
-            public String formatLabel(double value, boolean isValueX){
-
-                if(isValueX)
-                {
-                    return simpleDateFormat.format(new Date((long) value));
-                }else
-                {
-                    return super.formatLabel(value,isValueX);
-                }
-            }
-        });*/
 
         graph.getGridLabelRenderer().setNumHorizontalLabels(marcas.size());
-        //graph.getGridLabelRenderer().setTextSize(30f);
-        //graph.getGridLabelRenderer().reloadStyles();
 
         series.setColor(Color.BLUE);
         series.setThickness(7);

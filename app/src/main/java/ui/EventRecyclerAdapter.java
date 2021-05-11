@@ -78,8 +78,6 @@ public class EventRecyclerAdapter  extends RecyclerView.Adapter<EventRecyclerAda
         }
     }
 
-
-
     //Para los eventos
     public interface OnEventClickListener{
         void onEventClick(int position);

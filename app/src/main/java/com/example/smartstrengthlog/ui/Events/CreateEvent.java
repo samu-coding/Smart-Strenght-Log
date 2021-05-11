@@ -47,8 +47,6 @@ public class CreateEvent extends AppCompatActivity {
         nameEvent = findViewById(R.id.name_event);
         saveEvent = findViewById(R.id.button_save_Event);
 
-
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -68,7 +66,7 @@ public class CreateEvent extends AppCompatActivity {
                    if (date != null){
 
                        saveEvent(nameEventString, date);
-
+                       //Cambio de actividad
                        Intent intent = new Intent(CreateEvent.this,
                                EventList.class);
                        startActivity(intent);
@@ -91,12 +89,6 @@ public class CreateEvent extends AppCompatActivity {
 
         String currentUserId = SmartStrengthLogAPI.getInstance().getUserId();
 
-       /* Map<String, Object> evento = new HashMap<>();
-        evento.put("nameEvent", nameEvent);
-        evento.put("dateEvent", date);
-        evento.put("user", currentUserId);
-        evento.put("eventID", String.valueOf(Timestamp.now().getSeconds()));*/
-
         Event evento = new Event();
         evento.setNameEvent(nameEvent);
         evento.setDateEvent(date);
@@ -107,7 +99,7 @@ public class CreateEvent extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d("EVENT", "EVENT SAVED IN FIRESTORE!");
+                        Log.d("EVENT", "Event saved.");
                     }
                 });
 

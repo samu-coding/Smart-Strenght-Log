@@ -40,8 +40,6 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_selection_progress);
 
-
-
         //Bind
         name_exercise1 = findViewById(R.id.ejercicio1_button);
         name_exercise2 = findViewById(R.id.ejercicio2_button);
@@ -61,15 +59,12 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
 
                                 //Guardamos los nombres de los ejercicios
                                 documentID = document.getId();
-                                //Log.d("DOCU", documentID + " => " + document.getData());
+
                                 ArrayList<String> Ejercicios = (ArrayList<String>) document.get("exercises");
                                 Log.d("EJERCICIOS", "Lista de ejericios:" +Ejercicios);
                                 name_exercise1.setText(Ejercicios.get(0));
                                 name_exercise2.setText(Ejercicios.get(1));
                                 name_exercise3.setText(Ejercicios.get(2));
-
-                                //inforPrevSessio();
-
 
                             }
                         } else {
@@ -89,6 +84,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
                 intent.putExtra("workoutId", workoutId);
                 intent.putExtra("documentID", documentID);
                 intent.putExtra("exercise", name_exercise1.getText());
+                intent.putExtra("num_ejercicio", "Ejercicio 1");
                 startActivity(intent);
 
             }
@@ -105,6 +101,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
                 intent.putExtra("workoutId", workoutId);
                 intent.putExtra("documentID", documentID);
                 intent.putExtra("exercise", name_exercise2.getText());
+                intent.putExtra("num_ejercicio", "Ejercicio 2");
                 startActivity(intent);
 
             }
@@ -121,6 +118,7 @@ public class ExerciseSelectionProgress extends AppCompatActivity {
                 intent.putExtra("workoutId", workoutId);
                 intent.putExtra("documentID", documentID);
                 intent.putExtra("exercise", name_exercise3.getText());
+                intent.putExtra("num_ejercicio", "Ejercicio 3");
                 startActivity(intent);
 
             }

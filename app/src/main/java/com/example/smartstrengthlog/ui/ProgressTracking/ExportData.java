@@ -32,7 +32,6 @@ public class ExportData extends AppCompatActivity {
     //Connection to Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private String name_exercise;
     private String workoutId;
     private String documentID;
     private int set= 0;
@@ -44,15 +43,12 @@ public class ExportData extends AppCompatActivity {
 
         //Obtenemos los valores que vienen de la vista anterior
         workoutId = (String) getIntent().getSerializableExtra("workoutID");
-        //name_exercise = (String) getIntent().getSerializableExtra("exercise");
         documentID = (String) getIntent().getSerializableExtra("documentID");
-        //buttonExport();
     }
 
     public void buttonExport(View view){
         StringBuilder data = new StringBuilder();
-        data.append(" ,Set,Repetitions,Weight,Reps In Reserve"); //Title
-
+        data.append(" ,Set,Repetitions,Weight,Reps In Reserve"); //Columnas CSV
 
         //Obtención del documento
         db.collection("Workout")
@@ -66,7 +62,6 @@ public class ExportData extends AppCompatActivity {
 
                                 //Guardamos los nombres de los ejercicios
                                 documentID = document.getId();
-                                Log.d("DOCID",""+documentID);
                                 exportar(data, "Ejercicio 1", 1, documentID);
                             }
                         } else {
@@ -91,7 +86,6 @@ public class ExportData extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("SEARCH", document.getId() + " => " + document.getData());
                         String auxID = document.getId();
 
                         //Subquery para los valores del primer set
@@ -112,7 +106,6 @@ public class ExportData extends AppCompatActivity {
                                             String rir = document.get("RIR").toString();
                                             String name_ejercicio = document.get("Exercise").toString();
 
-                                            Log.d("INFO SET", "Ejercicio: " + Ejercicio + ", Set: " + set);
                                             data.append("\n" + name_ejercicio + "," + "SET "+set + "," + repes + "," + peso + "," + rir);
 
                                             if (set ==1 ){

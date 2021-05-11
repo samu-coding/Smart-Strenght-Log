@@ -41,16 +41,11 @@ import util.WorkoutSessionAPI;
 public class DeleteWorkout extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private StorageReference storageReference;
     private List<Workout> workoutList;
     private RecyclerView recyclerView;
     private WorkoutRecyclerAdapter workoutRecyclerAdapter;
-
     private CollectionReference collectionReference = db.collection("Workout");
-    //private TextView noWorkoutEntry;
-
-    private String userId;
-
+        private String userId;
     private DashboardViewModel dashboardViewModel;
 
     @Override
@@ -72,7 +67,6 @@ public class DeleteWorkout extends AppCompatActivity {
         //Para poder obtener el contexto del Fragment, usamos get Activity.
         mostrarWorkouts(this);
 
-
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -83,10 +77,8 @@ public class DeleteWorkout extends AppCompatActivity {
 
     public void onStart() {
         super.onStart();
-
         userId = SmartStrengthLogAPI.getInstance().getUserId();
         Log.d("USUARIO", "BUSQUEDA DOCUMENTO DE USUARIO :" + userId);
-
         mostrarWorkouts(this);
 
     }
@@ -158,10 +150,6 @@ public class DeleteWorkout extends AppCompatActivity {
                                                 onBackPressed();
                                             }
                                         });
-
-
-
-
                             }
                         } else {
                             Log.d("DOCU", "Error getting documents: ", task.getException());
@@ -173,7 +161,6 @@ public class DeleteWorkout extends AppCompatActivity {
 
     public void mostrarWorkouts(Context HomeFragmentContext) {
         collectionReference.whereEqualTo("user", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -194,7 +181,6 @@ public class DeleteWorkout extends AppCompatActivity {
 
                     if (workoutList.isEmpty()) {
 
-                        //Toast.makeText(HomeFragmentContext, "NO ENCUENTRA WK", Toast.LENGTH_SHORT).show();
                         Log.d("DOCU", "ERROR GETTING DOCUMENTS");
 
                     }

@@ -38,18 +38,12 @@ import util.WorkoutSessionAPI;
 
 public class RoutineSelectionExportData extends AppCompatActivity {
 
-    private HomeViewModel homeViewModel;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private StorageReference storageReference;
     private List<Workout> workoutList;
     private RecyclerView recyclerView;
     private WorkoutRecyclerAdapter workoutRecyclerAdapter;
 
     private CollectionReference collectionReference = db.collection("Workout");
-    //private TextView noWorkoutEntry;
 
     private String userId;
 
@@ -64,8 +58,6 @@ public class RoutineSelectionExportData extends AppCompatActivity {
                 new ViewModelProvider(this).get(DashboardViewModel.class);
         final TextView textView = findViewById(R.id.text_dashboard);
 
-        //noWorkoutEntry = findViewById(R.id.list_no_workouts);
-
         workoutList = new ArrayList<>();
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -74,7 +66,6 @@ public class RoutineSelectionExportData extends AppCompatActivity {
 
         //Para poder obtener el contexto del Fragment, usamos get Activity.
         mostrarWorkouts(this);
-
 
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -92,12 +83,10 @@ public class RoutineSelectionExportData extends AppCompatActivity {
 
         mostrarWorkouts(this);
 
-
     }
 
 
     public void onWorkoutClick1(int position) {
-        //Log.d("Clicked", "onWorkoutClick: " + position);
         WorkoutSessionAPI workoutSessionAPI = WorkoutSessionAPI.getInstance();
         workoutSessionAPI.setExerciseNumber(0);
 
@@ -115,7 +104,6 @@ public class RoutineSelectionExportData extends AppCompatActivity {
 
     public void mostrarWorkouts(Context HomeFragmentContext) {
         collectionReference.whereEqualTo("user", userId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            //collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -136,14 +124,13 @@ public class RoutineSelectionExportData extends AppCompatActivity {
 
                     if (workoutList.isEmpty()) {
 
-                        //Toast.makeText(HomeFragmentContext, "NO ENCUENTRA WK", Toast.LENGTH_SHORT).show();
                         Log.d("DOCU", "ERROR GETTING DOCUMENTS");
 
                     }
 
 
                 } else {
-                    Toast.makeText(HomeFragmentContext, "No workouts to show", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeFragmentContext, "No workouts to show.", Toast.LENGTH_SHORT).show();
                     Log.d("DOCU", "ERROR GETTING DOCUMENTS");
                 }
             }

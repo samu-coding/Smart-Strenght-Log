@@ -262,8 +262,6 @@ public class WorkoutSessionLog extends AppCompatActivity {
                 workoutSessionAPI.setSet3_E3(set3);
 
                 break;
-
-
         }
 
         //Incrementamos el numero del ejercicio
@@ -313,13 +311,13 @@ public class WorkoutSessionLog extends AppCompatActivity {
         .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d("UPDDATE", "ACTUALIZACIÓN EXISTOSA");
+                Log.d("UPDDATE", "Update success");
             }
         })
         .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("UPDDATE", "ACTUALIZACIÓN FRACASADA");
+                Log.d("UPDDATE", "Update error");
             }
         });
 
@@ -348,13 +346,13 @@ public class WorkoutSessionLog extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("FECHA LW", "DocumentSnapshot successfully updated!");
+                        Log.d("FECHA Update", "DocumentSnapshot successfully updated!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("FECHA LW", "Error updating document", e);
+                        Log.w("FECHA Update", "Error updating document", e);
                     }
                 });
 
@@ -364,17 +362,11 @@ public class WorkoutSessionLog extends AppCompatActivity {
     public void saveSet(Map set, String numero_ejercicio){
 
         //Crear fecha del documento
-
         CollectionReference collectionReference = db.collection("Workout").document(documentID).collection("History").document(java.time.LocalDate.now().toString()).collection(numero_ejercicio);
-        //Test
         collectionReference.add(set)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-
-                        //Toast.makeText(WorkoutSessionLog.this, "Saving Workout Session...", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(WorkoutSessionLog.this, MainMenu.class));
-
 
                         Intent intent = new Intent(WorkoutSessionLog.this,
                                 MainMenu.class);
@@ -433,9 +425,8 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("SEARCH", document.getId() + " => " + document.getData());
-                        String auxID = document.getId();
 
+                        String auxID = document.getId();
                         //Subquery para los valores del primer set
                         Query subQuery1 = db.collection("Workout").document(documentID).collection("History")
                                 .document(auxID).collection(ejercicio).whereEqualTo("Set",1);
@@ -449,12 +440,10 @@ public class WorkoutSessionLog extends AppCompatActivity {
                                         prev_reps_set1.setText(document.get("Reps").toString());
                                         prev_weight_set1.setText(document.get("Weight").toString());
                                         prev_rir_set1.setText(document.get("RIR").toString());
-
                                     }
                                 } else {
                                     Log.d("SEARCH", "Error getting documents: ", task.getException());
                                 }
-
 
                             }
                         });
@@ -472,13 +461,10 @@ public class WorkoutSessionLog extends AppCompatActivity {
                                         prev_reps_set2.setText(document.get("Reps").toString());
                                         prev_weight_set2.setText(document.get("Weight").toString());
                                         prev_rir_set2.setText(document.get("RIR").toString());
-
                                     }
                                 } else {
                                     Log.d("SEARCH", "Error getting documents: ", task.getException());
                                 }
-
-
                             }
                         });
 
@@ -492,11 +478,9 @@ public class WorkoutSessionLog extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Log.d("SEARCH-2", "SET 1 INFO: " + document.getData());
                                         prev_reps_set3.setText(document.get("Reps").toString());
                                         prev_weight_set3.setText(document.get("Weight").toString());
                                         prev_rir_set3.setText(document.get("RIR").toString());
-
                                     }
                                 } else {
                                     Log.d("SEARCH", "Error getting documents: ", task.getException());
@@ -506,19 +490,13 @@ public class WorkoutSessionLog extends AppCompatActivity {
                             }
                         });
 
-
-
-
                     }
                 } else {
                     Log.d("SEARCH", "Error getting documents: ", task.getException());
                 }
 
-
             }
         });
-
-
 
     }
 

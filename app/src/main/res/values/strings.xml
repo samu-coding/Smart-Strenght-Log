@@ -68,4 +68,19 @@
     <string name="all_your_events_explain">This list shows all your upcoming events.</string>
     <string name="event_selection_delete">Select the event you want to delete:</string>
     <string name="event_selection_delete_warning">Be aware that the event will be permanently deleted.</string>
+    <string name="select_a_date">Select a date</string>
+    <string name="save_event">SAVE EVENT</string>
+    <string name="foto_exportar_csv">Foto exportar csv</string>
+    <string name="export_data">Export Data</string>
+    <string name="exercise_1">Exercise 1</string>
+    <string name="show_progress">SHOW PROGRESS</string>
+    <string name="complete_info_1rm">Complete the information to calculate your 1 RM:</string>
+    <string name="calculate">Calculate</string>
+    <string name="name_event">Name Event</string>
+    <string name="date">Date</string>
+    <string name="icono_calendario">Icono calendario</string>
+    <string name="icono_papelera">Icono papelera</string>
+    <string name="icono_sin_circulo_ssl">Icono sin circulo SSL</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="textview">TextView</string>
 </resources>
